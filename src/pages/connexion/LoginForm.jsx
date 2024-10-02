@@ -4,11 +4,11 @@ import {
   Typography, 
   TextField, 
   Button, 
-  Link, 
   Container, 
   CssBaseline 
 } from '@mui/material'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
+import { NavLink, Outlet } from 'react-router-dom'
 
 const theme = createTheme({
   palette: {
@@ -57,7 +57,8 @@ export default function LoginForm() {
               autoComplete="current-password"
               placeholder="Please Enter Your Password here"
             />
-            <Button
+            <NavLink to="/dashboard">
+              <Button
               type="submit"
               fullWidth
               variant="contained"
@@ -65,12 +66,19 @@ export default function LoginForm() {
             >
               Login
             </Button>
+            </NavLink>
+            
             <Box sx={{ textAlign: 'center' }}>
-              <Link href="#" variant="body2" sx={{ color: 'primary.main' }}>
-                {"If you haven't Register yet ? Register Now"}
-              </Link>
+              <Typography variant="body2" sx={{ color: 'primary.main' }}>
+                Don't have an account? <NavLink to="/sign-up">Sign Up</NavLink>
+                {/* If you haven't Register yet ? 
+               <Typography> 
+                  Register Now
+                </Typography> */}
+              </Typography>
             </Box>
           </Box>
+          <Outlet/>
         </Box>
       </Container>
     </ThemeProvider>
