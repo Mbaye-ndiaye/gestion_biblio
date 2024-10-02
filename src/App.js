@@ -1,14 +1,22 @@
-import './App.css';
-import Admin from './components/admin/Admin';
-import Utilisateur from './pages/utilisateurs/Utilisateur';
+import "./App.css";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+import Dashboard from "./pages/admin/Dashboard";
+import Livres from "./pages/admin/Livre";
+import Membres from "./pages/admin/Membres";
+import Message from "./pages/admin/Message";
+
 function App() {
   return (
-    <div className="App">
-      <h1>Material-UI Buttons</h1>
-      <h1>Resouder un bug</h1>
-      <Admin />
-      <Utilisateur />
-    </div>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Dashboard />}></Route>
+          <Route path="/Livres" element={<Livres />}></Route>
+          <Route path="/Membres" element={<Membres />}></Route>
+          <Route path="/Message" element={<Message />}></Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
