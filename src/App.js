@@ -1,6 +1,7 @@
 import './App.css';
 import Admin from './components/admin/Admin';
 import Utilisateur from './pages/utilisateurs/Utilisateur';
+import LoginForm from './pages/connexion/LoginForm';
 function App() {
   return (
     <div className="App">
@@ -8,6 +9,7 @@ function App() {
       <h1>Resouder un bug</h1>
       <Admin />
       <Utilisateur />
+      <LoginForm />
     </div>
   );
 }
