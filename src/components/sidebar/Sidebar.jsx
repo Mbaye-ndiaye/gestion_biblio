@@ -20,7 +20,8 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import BookIcon from "@mui/icons-material/Book";
 import GroupIcon from "@mui/icons-material/Group";
 import MarkunreadIcon from "@mui/icons-material/Markunread";
-import { useNavigate } from "react-router";
+// import { useNavigate } from "react-router";
+import { NavLink } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -106,7 +107,7 @@ export default function Sidebar() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -136,7 +137,7 @@ export default function Sidebar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Mini variant drawer
+            Sama Livres
           </Typography>
         </Toolbar>
       </AppBar>
@@ -152,12 +153,10 @@ export default function Sidebar() {
         </DrawerHeader>
         <Divider />
         <List>
+          <NavLink to="/dashboard">
           <ListItem
             disablePadding
             sx={{ display: "block" }}
-            onClick={() => {
-              navigate("/");
-            }}
           >
             <ListItemButton
               sx={[
@@ -205,67 +204,65 @@ export default function Sidebar() {
               />
             </ListItemButton>
           </ListItem>
+          </NavLink>
 
-          <ListItem
-            disablePadding
-            sx={{ display: "block" }}
-            onClick={() => {
-              navigate("/Livres");
-            }}
-          >
-            <ListItemButton
-              sx={[
-                {
-                  minHeight: 48,
-                  px: 2.5,
-                },
-                open
-                  ? {
-                      justifyContent: "initial",
-                    }
-                  : {
-                      justifyContent: "center",
-                    },
-              ]}
+          <NavLink to="/livre">
+            <ListItem
+              disablePadding
+              sx={{ display: "block" }}
+              
             >
-              <ListItemIcon
+              <ListItemButton
                 sx={[
                   {
-                    minWidth: 0,
-                    justifyContent: "center",
+                    minHeight: 48,
+                    px: 2.5,
                   },
                   open
                     ? {
-                        mr: 3,
+                        justifyContent: "initial",
                       }
                     : {
-                        mr: "auto",
+                        justifyContent: "center",
                       },
                 ]}
               >
-                <BookIcon />
-              </ListItemIcon>
-              <ListItemText
-                primary="Nombre des Livres"
-                sx={[
-                  open
-                    ? {
-                        opacity: 1,
-                      }
-                    : {
-                        opacity: 0,
-                      },
-                ]}
-              />
-            </ListItemButton>
-          </ListItem>
+                <ListItemIcon
+                  sx={[
+                    {
+                      minWidth: 0,
+                      justifyContent: "center",
+                    },
+                    open
+                      ? {
+                          mr: 3,
+                        }
+                      : {
+                          mr: "auto",
+                        },
+                  ]}
+                >
+                  <BookIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary="Nombre des Livres"
+                  sx={[
+                    open
+                      ? {
+                          opacity: 1,
+                        }
+                      : {
+                          opacity: 0,
+                        },
+                  ]}
+                />
+              </ListItemButton>
+            </ListItem>
+          </NavLink>
 
-          <ListItem
+          <NavLink to="/membres"><ListItem
             disablePadding
             sx={{ display: "block" }}
-            onClick={() => {
-              navigate("/Membres");
-            }}
           >
             <ListItemButton
               sx={[
@@ -300,7 +297,7 @@ export default function Sidebar() {
                 <GroupIcon />
               </ListItemIcon>
               <ListItemText
-                primary="Dashboard"
+                primary="Membres"
                 sx={[
                   open
                     ? {
@@ -313,13 +310,11 @@ export default function Sidebar() {
               />
             </ListItemButton>
           </ListItem>
-
-          <ListItem
+          </NavLink>
+          
+          <NavLink to="/messages"><ListItem
             disablePadding
             sx={{ display: "block" }}
-            onClick={() => {
-              navigate("/Message");
-            }}
           >
             <ListItemButton
               sx={[
@@ -354,7 +349,7 @@ export default function Sidebar() {
                 <MarkunreadIcon />
               </ListItemIcon>
               <ListItemText
-                primary="Dashboard"
+                primary="Messages"
                 sx={[
                   open
                     ? {
@@ -367,6 +362,8 @@ export default function Sidebar() {
               />
             </ListItemButton>
           </ListItem>
+          </NavLink>
+          
         </List>
         <Divider />
       </Drawer>

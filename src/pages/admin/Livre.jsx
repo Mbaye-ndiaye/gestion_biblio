@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material";
 import React from "react";
 import Sidebar from "../../components/sidebar/Sidebar";
 
-export default function Livres() {
+export default function Livre() {
   return (
     <>
       <Box sx={{ display: "flex" }}>

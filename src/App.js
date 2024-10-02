@@ -1,23 +1,55 @@
+
 import "./App.css";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+// import Dashboard from "./pages/admin/Dashboard";
+// import Livres from "./pages/admin/Livre";
+// import Membres from "./pages/admin/Membres";
+// import Message from "./pages/admin/Message";
+import LoginForm from "./pages/connexion/LoginForm";
+import SignUp from "./pages/inscription/SignUp";
 import Dashboard from "./pages/admin/Dashboard";
-import Livres from "./pages/admin/Livre";
+import Livre from "./pages/admin/Livre";
 import Membres from "./pages/admin/Membres";
 import Message from "./pages/admin/Message";
 
+const router = createBrowserRouter([
+  {
+  path: '/',
+  element: <Outlet />,
+  children: [{
+    path: '/',
+    element: <LoginForm/>
+  },
+  {
+    path: '/sign-up',
+    element: <SignUp/>
+  },
+  {
+    path: '/dashboard',
+    element: <Dashboard/>,
+    
+  },
+  {
+    path: '/livre',
+    element: <Livre/>,
+    
+  },
+  {
+    path: '/membres',
+    element: <Membres/>
+    
+  },
+  {
+    path: '/messages',
+    element: <Message/>
+    
+  },
+]
+  }
+])
+
 function App() {
-  return (
-    <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Dashboard />}></Route>
-          <Route path="/Livres" element={<Livres />}></Route>
-          <Route path="/Membres" element={<Membres />}></Route>
-          <Route path="/Message" element={<Message />}></Route>
-        </Routes>
-      </BrowserRouter>
-    </>
-  );
+  return  <RouterProvider router={router}/>
 }
 
 export default App;
