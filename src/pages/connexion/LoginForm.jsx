@@ -21,7 +21,7 @@ const theme = createTheme({
 export default function LoginForm() {
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs" sx={{ border: '#e3f2cb solid', paddingBottom: 10, paddingTop: 3, marginTop: 15, borderRadius: 2, boxShadow: 8 }}>
         <CssBaseline />
         <Box
           sx={{
@@ -29,10 +29,11 @@ export default function LoginForm() {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            
           }}
         >
-          <Typography component="h1" variant="h4" sx={{ color: 'primary.main', fontWeight: 'bold', mb: 3 }}>
-            LOGIN
+          <Typography component="h1" variant="h4" sx={{ color: 'primary.main', fontWeight: 'bold' }}>
+            LOG IN
           </Typography>
           <Box component="form" noValidate sx={{ mt: 1 }}>
             <TextField
@@ -71,10 +72,6 @@ export default function LoginForm() {
             <Box sx={{ textAlign: 'center' }}>
               <Typography variant="body2" sx={{ color: 'primary.main' }}>
                 Don't have an account? <NavLink to="/sign-up">Sign Up</NavLink>
-                {/* If you haven't Register yet ? 
-               <Typography> 
-                  Register Now
-                </Typography> */}
               </Typography>
             </Box>
           </Box>
