@@ -1,15 +1,55 @@
-import './App.css';
-import Admin from './components/admin/Admin';
-import Utilisateur from './pages/utilisateurs/Utilisateur';
+
+import "./App.css";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+// import Dashboard from "./pages/admin/Dashboard";
+// import Livres from "./pages/admin/Livre";
+// import Membres from "./pages/admin/Membres";
+// import Message from "./pages/admin/Message";
+import LoginForm from "./pages/connexion/LoginForm";
+import SignUp from "./pages/inscription/SignUp";
+import Dashboard from "./pages/admin/Dashboard";
+import Livre from "./pages/admin/Livre";
+import Membres from "./pages/admin/Membres";
+import Message from "./pages/admin/Message";
+
+const router = createBrowserRouter([
+  {
+  path: '/',
+  element: <Outlet />,
+  children: [{
+    path: '/',
+    element: <LoginForm/>
+  },
+  {
+    path: '/sign-up',
+    element: <SignUp/>
+  },
+  {
+    path: '/dashboard',
+    element: <Dashboard/>,
+    
+  },
+  {
+    path: '/livre',
+    element: <Livre/>,
+    
+  },
+  {
+    path: '/membres',
+    element: <Membres/>
+    
+  },
+  {
+    path: '/messages',
+    element: <Message/>
+    
+  },
+]
+  }
+])
+
 function App() {
-  return (
-    <div className="App">
-      <h1>Material-UI Buttons</h1>
-      <h1>Resouder un bug</h1>
-      <Admin />
-      <Utilisateur />
-    </div>
-  );
+  return  <RouterProvider router={router}/>
 }
 
 export default App;
