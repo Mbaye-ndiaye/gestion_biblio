@@ -1,13 +1,24 @@
 import React from 'react'
 import { AppBar, Toolbar, Typography, InputBase, Button, Card, CardContent, CardMedia, Grid } from '@mui/material'
 import { Search as SearchIcon, ShoppingCart as ShoppingCartIcon } from '@mui/icons-material'
+import ImageUrl from '../../assets/image/StockCake.jpg'
+import Livre1 from '../../assets/image/livre9.jpeg' 
+import Livre2 from '../../assets/image/livre1.jpeg'
+import Livre3 from '../../assets/image/livre2.jpg'
+import Livre4 from '../../assets/image/livre3.jpeg'
+import Livre5 from '../../assets/image/livre4.jpeg'
+import Livre6 from '../../assets/image/livre5.jpeg'
+import Livre7 from '../../assets/image/livre6.jpeg'
+import Livre8 from '../../assets/image/livre7.jpeg'
+import Livre9 from '../../assets/image/livre8.jpeg'
+import { NavLink } from 'react-router-dom'
 
 // Header Component
 const Header = () => (
   <AppBar position="static" color="default">
     <Toolbar>
       <Typography variant="h6" style={{ flexGrow: 1 }}>
-        BOOKS
+       Tànkub xam-xam
       </Typography>
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <InputBase
@@ -16,8 +27,8 @@ const Header = () => (
         />
         <SearchIcon />
       </div>
-      <Button color="inherit">Johnny</Button>
-      <Button color="inherit">Logout</Button>
+      <NavLink to="/" style={{ textDecoration: "none", textDecorationColor: "black" }} ><Button color="inherit">Login</Button></NavLink>
+      
       <Button color="inherit">
         <ShoppingCartIcon /> My basket
       </Button>
@@ -30,11 +41,11 @@ const FeaturedBook = ({ title, author, description, imageUrl }) => (
   <Card style={{ position: 'relative', color: 'white' }}>
     <CardMedia
       component="img"
-      height="400"
-      image={imageUrl}
+      height="650"
+      image={ImageUrl}
       alt={title}
     />
-    <CardContent style={{ position: 'absolute', bottom: 0, backgroundColor: 'rgba(0,0,0,0.6)' }}>
+    <CardContent style={{ position: 'absolute', bottom: 0, width: 400, backgroundColor: 'rgba(0,0,0,0.6)' }}>
       <Typography variant="h4">{title}</Typography>
       <Typography variant="subtitle1">by {author}</Typography>
       <Typography variant="body2">{description}</Typography>
@@ -43,12 +54,13 @@ const FeaturedBook = ({ title, author, description, imageUrl }) => (
 )
 
 // Book Card Component
-const BookCard = ({ title, imageUrl, price }) => (
+const BookCard = ({ title, image, price }) => (
   <Card>
     <CardMedia
       component="img"
-      height="200"
-      image={imageUrl}
+      height="350"
+      width="300"
+      image={image}
       alt={title}
     />
     <CardContent>
@@ -70,15 +82,22 @@ export default function BookStore() {
         imageUrl="/placeholder.svg?height=400&width=800"
       />
       <Typography variant="h5" style={{ margin: '20px 0' }}>New arrivals</Typography>
-      <Grid container spacing={3}>
+      <Grid container spacing={2} sx={{p: 8}}>
         {[
-          { title: "Forbandede yngel", price: 18, imageUrl: "/placeholder.svg?height=200&width=150" },
-          { title: "Sund og slank med 5:2", price: 24, imageUrl: "/placeholder.svg?height=200&width=150" },
-          { title: "Yahya Hassan", price: 17, imageUrl: "/placeholder.svg?height=200&width=150" },
-          { title: "Mat & drikke i CH", price: 27, imageUrl: "/placeholder.svg?height=200&width=150" },
-          { title: "Den hemmelige socialdemokrat", price: 17, imageUrl: "/placeholder.svg?height=200&width=150" },
+          { title: "Forbandede yngel", price: 18, image: Livre1 },
+          { title: "Sund og slank med 5:2", price: 24, image: Livre2 },
+          { title: "Yahya Hassan", price: 17, image: Livre3  },
+          { title: "Mat & drikke i CH", price: 27, image: Livre4 },
+          { title: "Den hemmelige socialdemokrat", price: 17, image: Livre5 },
+          { title: "Den hemmelige socialdemokrat", price: 17, image: Livre6  },
+          { title: "Den hemmelige socialdemokrat", price: 17, image: Livre7 },
+          { title: "Den hemmelige socialdemokrat", price: 17, image: Livre8  },
+          { title: "Den hemmelige socialdemokrat", price: 17, image: Livre9 },
+          { title: "Den hemmelige socialdemokrat", price: 17, image: Livre7 },
+          { title: "Den hemmelige socialdemokrat", price: 17, image: Livre8  },
+          { title: "Den hemmelige socialdemokrat", price: 17, image: Livre9 },
         ].map((book, index) => (
-          <Grid item xs={12} sm={6} md={2} key={index}>
+          <Grid item xs={10} sm={6} md={2} key={index}>
             <BookCard {...book} />
           </Grid>
         ))}
