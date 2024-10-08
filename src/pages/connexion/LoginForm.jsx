@@ -45,7 +45,7 @@ export default function LoginForm() {
             marginTop: 15,
             borderRadius: 2,
             boxShadow: 8,
-            backgroundColor:"#fff"
+            backgroundColor: "#fff",
           }}
         >
           <CssBaseline />
@@ -87,7 +87,7 @@ export default function LoginForm() {
                 autoComplete="current-password"
                 placeholder="Please Enter Your Password here"
               />
-              <NavLink to="/dashboard">
+              <NavLink to="/utilisateur">
                 <Button
                   type="submit"
                   fullWidth
