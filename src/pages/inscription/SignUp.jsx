@@ -9,6 +9,8 @@ import {
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
+import Image from "../../assets/image/StockCake.jpg";
+import { NavLink, Outlet } from "react-router-dom";
 import { register } from "../../actions/authActions"; // import the register action
 
 const theme = createTheme({
@@ -132,15 +134,23 @@ export default function SignUp() {
                 value={formData.password}
                 onChange={handleChange}
               />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2, textTransform: "none" }}
-              >
-                Sign up
-              </Button>
+              <NavLink to="/dashboard">
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2, textTransform: "none" }}
+                >
+                  Sign up
+                </Button>
+              </NavLink>
+              <Box sx={{ textAlign: "center" }}>
+                <Typography variant="body2" sx={{ color: "primary.main" }}>
+                  Don't have an account? <NavLink to="/">Log in Now</NavLink>
+                </Typography>
+              </Box>
             </Box>
+            <Outlet />
           </Box>
         </Container>
       </Box>
