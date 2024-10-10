@@ -134,7 +134,7 @@ export default function SignUp() {
                 value={formData.password}
                 onChange={handleChange}
               />
-              
+              <NavLink to="/dashboard">
                 <Button
                   type="submit"
                   fullWidth
@@ -143,7 +143,7 @@ export default function SignUp() {
                 >
                   Sign up
                 </Button>
-             
+             </NavLink>
               <Box sx={{ textAlign: "center" }}>
                 <Typography variant="body2" sx={{ color: "primary.main" }}>
                   Don't have an account? <NavLink to="/">Log in Now</NavLink>
