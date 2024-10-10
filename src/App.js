@@ -1,8 +1,4 @@
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
-// import Dashboard from "./pages/admin/Dashboard";
-// import Livres from "./pages/admin/Livre";
-// import Membres from "./pages/admin/Membres";
-// import Message from "./pages/admin/Message";
 import LoginForm from "./pages/connexion/LoginForm";
 import SignUp from "./pages/inscription/SignUp";
 import Dashboard from "./pages/admin/Dashboard";
@@ -11,6 +7,7 @@ import Membres from "./pages/admin/Membres";
 import Message from "./pages/admin/Message";
 import Utilisateur from "./pages/utilisateurs/Utilisateur";
 import ProfilePage from "./pages/profil/ProfilePage";
+import Emprunte from "./pages/emprunts/Emprunte";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +47,11 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: <ProfilePage />,
+      },
+
+      {
+        path: "/emprunts",
+        element: <Emprunte />,
       },
     ],
   },
