@@ -15,26 +15,50 @@ import { NavLink } from 'react-router-dom'
 
 // Header Component
 const Header = () => (
-  <AppBar position="static" color="default">
-    <Toolbar>
+  <AppBar position="static" color="default" >
+    <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
+      {/* Titre aligné à gauche */}
       <Typography variant="h6" style={{ flexGrow: 1 }}>
-       Tànkub xam-xam
+        Tànkub xam-xam
       </Typography>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
+
+        <div style={{ marginRight: "auto" }}>
+        <Button color="inherit" variant="contained" >
+        <NavLink to="/emprunts" style={{ textDecoration: "none", color: "black" }}>
+          Mes Empruntes
+        </NavLink>
+      </Button>
+      <Button color="inherit" variant="contained" style={{ margin: 'auto'}}>
+        <NavLink to="/emprunts" style={{ textDecoration: "none", color: "black" }}>
+          Mes livres
+        </NavLink>
+      </Button>
+        </div>
+      {/* Bouton centré */}
+      
+
+      {/* Recherche alignée à droite */}
+      <div style={{ display: 'flex',  marginLeft: 'auto' }}>
         <InputBase
           placeholder="Search..."
-          style={{ marginRight: '10px' }}
+          style={{ marginRight: '10px', border: '1px solid #ccc', borderRadius: '4px', padding: '5px' }}
         />
         <SearchIcon />
       </div>
-      <NavLink to="/" style={{ textDecoration: "none", textDecorationColor: "black" }} ><Button color="inherit">Login</Button></NavLink>
-      
-      <Button color="inherit">
+
+      {/* Boutons avec des marges */}
+      <NavLink to="/" style={{ textDecoration: "none", color: "black", marginLeft: '20px' }}>
+        <Button color="inherit" variant="contained">
+          Login
+        </Button>
+      </NavLink>
+
+      <Button color="inherit" variant="contained" style={{ marginLeft: '20px' }}>
         <ShoppingCartIcon /> My basket
       </Button>
     </Toolbar>
   </AppBar>
-)
+);
 
 // Featured Book Component
 const FeaturedBook = ({ title, author, description, imageUrl }) => (
@@ -45,7 +69,7 @@ const FeaturedBook = ({ title, author, description, imageUrl }) => (
       image={ImageUrl}
       alt={title}
     />
-    <CardContent style={{ position: 'absolute', bottom: 0, width: 400, backgroundColor: 'rgba(0,0,0,0.6)' }}>
+    <CardContent style={{ position: 'absolute', bottom: 0, textAlign: "center", justifyContent: "center", backgroundColor: 'rgba(0,0,0,0.6)' }}>
       <Typography variant="h4">{title}</Typography>
       <Typography variant="subtitle1">by {author}</Typography>
       <Typography variant="body2">{description}</Typography>
@@ -54,7 +78,7 @@ const FeaturedBook = ({ title, author, description, imageUrl }) => (
 )
 
 // Book Card Component
-const BookCard = ({ title, image, price }) => (
+const BookCard = ({ title, image, }) => (
   <Card>
     <CardMedia
       component="img"
@@ -65,7 +89,7 @@ const BookCard = ({ title, image, price }) => (
     />
     <CardContent>
       <Typography variant="body2">{title}</Typography>
-      <Typography variant="body1" color="primary">${price}</Typography>
+      
     </CardContent>
   </Card>
 )
@@ -84,18 +108,18 @@ export default function BookStore() {
       <Typography variant="h5" style={{ margin: '20px 0' }}>New arrivals</Typography>
       <Grid container spacing={2} sx={{p: 8}}>
         {[
-          { title: "Forbandede yngel", price: 18, image: Livre1 },
-          { title: "Sund og slank med 5:2", price: 24, image: Livre2 },
-          { title: "Yahya Hassan", price: 17, image: Livre3  },
-          { title: "Mat & drikke i CH", price: 27, image: Livre4 },
-          { title: "Den hemmelige socialdemokrat", price: 17, image: Livre5 },
-          { title: "Den hemmelige socialdemokrat", price: 17, image: Livre6  },
-          { title: "Den hemmelige socialdemokrat", price: 17, image: Livre7 },
-          { title: "Den hemmelige socialdemokrat", price: 17, image: Livre8  },
-          { title: "Den hemmelige socialdemokrat", price: 17, image: Livre9 },
-          { title: "Den hemmelige socialdemokrat", price: 17, image: Livre7 },
-          { title: "Den hemmelige socialdemokrat", price: 17, image: Livre8  },
-          { title: "Den hemmelige socialdemokrat", price: 17, image: Livre9 },
+          { title: "Forbandede yngel", image: Livre1 },
+          { title: "Sund og slank med 5:2", image: Livre2 },
+          { title: "Yahya Hassan", image: Livre3  },
+          { title: "Mat & drikke i CH", image: Livre4 },
+          { title: "Den hemmelige socialdemokrat", image: Livre5 },
+          { title: "Den hemmelige socialdemokrat", image: Livre6  },
+          { title: "Den hemmelige socialdemokrat", image: Livre7 },
+          { title: "Den hemmelige socialdemokrat", image: Livre8  },
+          { title: "Den hemmelige socialdemokrat", image: Livre9 },
+          { title: "Den hemmelige socialdemokrat", image: Livre7 },
+          { title: "Den hemmelige socialdemokrat", image: Livre8  },
+          { title: "Den hemmelige socialdemokrat", image: Livre9 },
         ].map((book, index) => (
           <Grid item xs={10} sm={6} md={2} key={index}>
             <BookCard {...book} />

@@ -24,7 +24,6 @@ export default function LoginForm() {
     <ThemeProvider theme={theme}>
       <Box
         sx={{
-          // Or in your case backgroundImage: "url('images/cover.jpeg')"
           backgroundImage: `url(${Image})`,
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover", // Pour que l'image couvre toute la zone
