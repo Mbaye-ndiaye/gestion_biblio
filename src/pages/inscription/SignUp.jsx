@@ -132,14 +132,19 @@ export default function SignUp() {
                 value={formData.password}
                 onChange={handleChange}
               />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2, textTransform: "none" }}
-              >
-                Sign up
-              </Button>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2, textTransform: "none" }}
+                >
+                  Sign up
+                </Button>
+              <Box sx={{ textAlign: "center" }}>
+                <Typography variant="body2" sx={{ color: "primary.main" }}>
+                  Don't have an account? <NavLink to="/">Log in Now</NavLink>
+                </Typography>
+              </Box>
             </Box>
           </Box>
         </Container>
