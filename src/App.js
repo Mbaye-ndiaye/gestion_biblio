@@ -6,6 +6,7 @@ import Livre from "./pages/admin/Livre";
 import Membres from "./pages/admin/Membres";
 import Message from "./pages/admin/Message";
 import Utilisateur from "./pages/utilisateurs/Utilisateur";
+import ProfilePage from "./pages/profil/ProfilePage";
 import Emprunte from "./pages/emprunts/Emprunte";
 
 const router = createBrowserRouter([
@@ -42,9 +43,15 @@ const router = createBrowserRouter([
         path: "/utilisateur",
         element: <Utilisateur />,
       },
+
+      {
+        path: "/profile",
+        element: <ProfilePage />,
+      },
+
       {
         path: "/emprunts",
-        element: <Emprunte/> ,
+        element: <Emprunte />,
       },
     ],
   },
