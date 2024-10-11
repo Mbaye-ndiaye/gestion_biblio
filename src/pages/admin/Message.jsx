@@ -1,6 +1,7 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import React from "react";
 import Sidebar from "../../components/sidebar/Sidebar";
+import Tables from "../../components/table/Table";
 
 export default function Message() {
   return (
@@ -8,7 +9,18 @@ export default function Message() {
       <Box sx={{ display: "flex" }}>
         <Sidebar />
         <Box component="main" sx={{ flexGrow: 1, p: 3, marginTop: "55px" }}>
-          <Typography variant="h4">Message</Typography>
+          <Tables
+            headerValues={["Name", "Age", "Country", "Role"]}
+            rows={[
+              { name: "John Doe", age: 25, country: "USA", role: "Developer" },
+              {
+                name: "Jane Smith",
+                age: 30,
+                country: "Canada",
+                role: "Designer",
+              },
+            ]}
+          />
         </Box>
       </Box>
     </>
