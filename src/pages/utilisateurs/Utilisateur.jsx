@@ -28,11 +28,6 @@ const Header = () => (
           Mes Empruntes
         </NavLink>
       </Button>
-      <Button color="inherit" variant="contained" style={{ margin: 'auto'}}>
-        <NavLink to="/emprunts" style={{ textDecoration: "none", color: "black" }}>
-          Mes livres
-        </NavLink>
-      </Button>
         </div>
       {/* Bouton centré */}
       
@@ -69,7 +64,7 @@ const FeaturedBook = ({ title, author, description, imageUrl }) => (
       image={ImageUrl}
       alt={title}
     />
-    <CardContent style={{ position: 'absolute', bottom: 0, textAlign: "center", justifyContent: "center", backgroundColor: 'rgba(0,0,0,0.6)' }}>
+    <CardContent style={{ position: 'absolute', top: 10, left: 20, bottom: 0,  }}>
       <Typography variant="h4">{title}</Typography>
       <Typography variant="subtitle1">by {author}</Typography>
       <Typography variant="body2">{description}</Typography>
