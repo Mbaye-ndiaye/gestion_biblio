@@ -9,7 +9,10 @@ import {
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 import { register } from "../../actions/authActions"; // import the register action
+import Image from "../../assets/image/StockCake.jpg";
+
 
 const theme = createTheme({
   palette: {
