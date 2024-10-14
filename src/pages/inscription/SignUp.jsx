@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Typography,
@@ -9,7 +9,9 @@ import {
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
-import { register } from "../../actions/authActions"; // import the register action
+import { register } from "../../actions/authActions"; 
+import Image from "../../assets/image/StockCake.jpg";
+import { NavLink, useNavigate } from "react-router-dom"; 
 
 const theme = createTheme({
   palette: {
@@ -29,7 +31,8 @@ export default function SignUp() {
   });
 
   const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth); // Get auth state from Redux
+  const auth = useSelector((state) => state.auth); // to track registration status
+  const navigate = useNavigate(); // to navigate after success
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -37,9 +40,14 @@ export default function SignUp() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Dispatch the register action
-    dispatch(register(formData));
+    dispatch(register(formData)); 
   };
+
+  useEffect(() => {
+    if (auth.isAuthenticated) {
+      navigate("/loginForm"); 
+    }
+  }, [auth.isAuthenticated, navigate]); 
 
   return (
     <ThemeProvider theme={theme}>
@@ -80,13 +88,12 @@ export default function SignUp() {
               SIGN UP
             </Typography>
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-
-            <TextField
+              <TextField
                 margin="normal"
                 required
                 fullWidth
                 id="first_name"
-                label="first_name"
+                label="First Name"
                 name="first_name"
                 value={formData.first_name}
                 onChange={handleChange}
@@ -96,7 +103,7 @@ export default function SignUp() {
                 required
                 fullWidth
                 id="last_name"
-                label="last_name"
+                label="Last Name"
                 name="last_name"
                 value={formData.last_name}
                 onChange={handleChange}
@@ -106,7 +113,7 @@ export default function SignUp() {
                 required
                 fullWidth
                 id="telephone"
-                label="telephone"
+                label="Telephone"
                 name="telephone"
                 value={formData.telephone}
                 onChange={handleChange}
@@ -116,7 +123,7 @@ export default function SignUp() {
                 required
                 fullWidth
                 id="email"
-                label="email"
+                label="Email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
@@ -140,6 +147,13 @@ export default function SignUp() {
               >
                 Sign up
               </Button>
+
+              <Box sx={{ textAlign: "center" }}>
+                <Typography variant="body2" sx={{ color: "primary.main" }}>
+                  Don't have an account?{" "}
+                  <NavLink to="/sign-up">Sign Up</NavLink>
+                </Typography>
+              </Box>
             </Box>
           </Box>
         </Container>
