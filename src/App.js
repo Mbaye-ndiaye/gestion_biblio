@@ -9,6 +9,7 @@ import Utilisateur from "./pages/utilisateurs/Utilisateur";
 import ProfilePage from "./pages/profil/ProfilePage";
 import Emprunte from "./pages/emprunts/Emprunte";
 import DetailCard from "./pages/detailCard/DetailCard";
+import Panier from "./pages/utilisateurs/panier/Panier";
 
 const router = createBrowserRouter([
   {
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
       {
         path: "/DetailCard/:id", // Route avec paramètre dynamique
         element: <DetailCard />,
+      },
+      {
+        path: "/Panier",
+        element: <Panier />,
       },
     ],
   },
