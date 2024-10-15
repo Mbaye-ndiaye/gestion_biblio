@@ -1,19 +1,6 @@
 import React from "react";
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  InputBase,
-  Button,
-  Card,
-  CardContent,
-  CardMedia,
-  Grid,
-} from "@mui/material";
-import {
-  Search as SearchIcon,
-  ShoppingCart as ShoppingCartIcon,
-} from "@mui/icons-material";
+import { Typography, Card, CardContent, CardMedia, Grid } from "@mui/material";
+
 import ImageUrl from "../../assets/image/StockCake.jpg";
 import Livre1 from "../../assets/image/livre9.jpeg";
 import Livre2 from "../../assets/image/livre1.jpeg";
@@ -25,70 +12,7 @@ import Livre7 from "../../assets/image/livre6.jpeg";
 import Livre8 from "../../assets/image/livre7.jpeg";
 import Livre9 from "../../assets/image/livre8.jpeg";
 import { NavLink } from "react-router-dom";
-
-// Header Component
-const Header = () => (
-  <AppBar position="static" color="default">
-    <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
-      {/* Titre aligné à gauche */}
-      <Typography variant="h6" style={{ flexGrow: 1 }}>
-        Tànkub xam-xam
-      </Typography>
-
-      <div style={{ marginRight: "auto" }}>
-        <Button color="inherit" variant="contained">
-          <NavLink
-            to="/emprunts"
-            style={{ textDecoration: "none", color: "black" }}
-          >
-            Mes Empruntes
-          </NavLink>
-        </Button>
-        <Button color="inherit" variant="contained" style={{ margin: "auto" }}>
-          <NavLink
-            to="/emprunts"
-            style={{ textDecoration: "none", color: "black" }}
-          >
-            Mes livres
-          </NavLink>
-        </Button>
-      </div>
-      {/* Bouton centré */}
-
-      {/* Recherche alignée à droite */}
-      <div style={{ display: "flex", marginLeft: "auto" }}>
-        <InputBase
-          placeholder="Search..."
-          style={{
-            marginRight: "10px",
-            border: "1px solid #ccc",
-            borderRadius: "4px",
-            padding: "5px",
-          }}
-        />
-        <SearchIcon />
-      </div>
-
-      {/* Boutons avec des marges */}
-      <NavLink
-        to="/"
-        style={{ textDecoration: "none", color: "black", marginLeft: "20px" }}
-      >
-        <Button color="inherit" variant="contained">
-          Login
-        </Button>
-      </NavLink>
-
-      <Button
-        color="inherit"
-        variant="contained"
-        style={{ marginLeft: "20px" }}
-      >
-        <ShoppingCartIcon /> My basket
-      </Button>
-    </Toolbar>
-  </AppBar>
-);
+import Header from "../../components/navBarUtilisateur/Header";
 
 // Featured Book Component
 const FeaturedBook = ({ title, author, description, imageUrl }) => (
