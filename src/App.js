@@ -56,7 +56,7 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "/DetailCard",
+        path: "/DetailCard/:id", // Route avec paramètre dynamique
         element: <DetailCard />,
       },
     ],

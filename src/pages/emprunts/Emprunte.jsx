@@ -14,8 +14,11 @@ import {
   Divider,
   Avatar,
   ListItemAvatar,
+  Button,
+  
 } from '@mui/material'
-import { Search as SearchIcon, ArrowForward as ArrowForwardIcon } from '@mui/icons-material'
+import { useNavigate } from 'react-router-dom'
+import { Search as SearchIcon, ArrowForward as ArrowForwardIcon, ArrowBack } from '@mui/icons-material'
 import Livre5 from '../../assets/image/livre4.jpeg'
 import Livre6 from '../../assets/image/livre5.jpeg'
 import Livre7 from '../../assets/image/livre6.jpeg'
@@ -38,6 +41,7 @@ const livresEmpruntes = [
 
 export default function Emprunte() {
   const [recherche, setRecherche] = useState('')
+  const navigate = useNavigate()
 
   const livresFiltres = livresEmpruntes.filter(livre =>
     livre.titre.toLowerCase().includes(recherche.toLowerCase()) ||
@@ -48,6 +52,14 @@ export default function Emprunte() {
     <>
       <AppBar position="static" style={{ backgroundColor: "#000" }}>
         <Toolbar>
+        <Button
+            variant="contained"
+            color="black"
+            // Place le bouton à droite
+            onClick={() => navigate('/utilisateur')} // Redirige vers la page d'accueil
+          >
+            <ArrowBack />
+          </Button>
           <Typography variant="h6">
             Mes Emprunts
           </Typography>

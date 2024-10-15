@@ -127,24 +127,37 @@ const FeaturedBook = ({ title, author, description, imageUrl }) => (
 )
 
 // Book Card Component
-const BookCard = ({ title, image, }) => (
+const BookCard = ({ title, image, index }) => (
   <Card>
-    <CardMedia
-      component="img"
-      height="350"
-      width="300"
-      image={image}
-      alt={title}
-    />
+    <NavLink to={`/DetailCard/${index}`}>
+      <CardMedia
+        component="img"
+        height="350"
+        width="300"
+        image={image}
+        alt={title}
+      />
+    </NavLink>
     <CardContent>
       <Typography variant="body2">{title}</Typography>
-      
     </CardContent>
   </Card>
-)
+);
 
 // Main Component
 export default function BookStore() {
+  const books = [
+    { title: "Forbandede yngel", image: Livre1 },
+    { title: "Sund og slank med 5:2", image: Livre2 },
+    { title: "Yahya Hassan", image: Livre3 },
+    { title: "Mat & drikke i CH", image: Livre4 },
+    { title: "Den hemmelige socialdemokrat", image: Livre5 },
+    { title: "Den hemmelige socialdemokrat", image: Livre6 },
+    { title: "Den hemmelige socialdemokrat", image: Livre7 },
+    { title: "Den hemmelige socialdemokrat", image: Livre8 },
+    { title: "Den hemmelige socialdemokrat", image: Livre9 },
+  ];
+
   return (
     <div>
       <Header />
@@ -155,26 +168,13 @@ export default function BookStore() {
         imageUrl="/placeholder.svg?height=400&width=800"
       />
       <Typography variant="h5" style={{ margin: '20px 0' }}>New arrivals</Typography>
-      <Grid container spacing={2} sx={{p: 8}}>
-        {[
-          { title: "Forbandede yngel", image: Livre1 },
-          { title: "Sund og slank med 5:2", image: Livre2 },
-          { title: "Yahya Hassan", image: Livre3  },
-          { title: "Mat & drikke i CH", image: Livre4 },
-          { title: "Den hemmelige socialdemokrat", image: Livre5 },
-          { title: "Den hemmelige socialdemokrat", image: Livre6  },
-          { title: "Den hemmelige socialdemokrat", image: Livre7 },
-          { title: "Den hemmelige socialdemokrat", image: Livre8  },
-          { title: "Den hemmelige socialdemokrat", image: Livre9 },
-          { title: "Den hemmelige socialdemokrat", image: Livre7 },
-          { title: "Den hemmelige socialdemokrat", image: Livre8  },
-          { title: "Den hemmelige socialdemokrat", image: Livre9 },
-        ].map((book, index) => (
-          <Grid item  md={2} xs={5} sm={6} key={index}>
-            <BookCard {...book} />
+      <Grid container spacing={2} sx={{ p: 8 }}>
+        {books.map((book, index) => (
+          <Grid item md={2} xs={5} sm={6} key={index}>
+            <BookCard {...book} index={index} />
           </Grid>
         ))}
       </Grid>
     </div>
-  )
+  );
 }
