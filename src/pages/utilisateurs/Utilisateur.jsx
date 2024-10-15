@@ -20,7 +20,7 @@ const Header = () => (
     <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
       {/* Titre aligné à gauche */}
       <Typography variant="h6" style={{ flexGrow: 1 }}>
-        Tànkub xam-xam
+        Tànkub xam-xamm
       </Typography>
 
         <div style={{ marginRight: "auto" }}>
