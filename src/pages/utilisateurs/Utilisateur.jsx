@@ -1,12 +1,8 @@
 import React from 'react'
 import { AppBar, Toolbar, Typography, InputBase, Button, Card, CardContent, CardMedia, Grid, Box } from '@mui/material'
 import { Search as SearchIcon, ShoppingCart as ShoppingCartIcon } from '@mui/icons-material'
-import { styled, alpha } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import Image from "../../assets/image/StockCake.jpg";
-import Tooltip from "@mui/material/Tooltip";
-import IconButton from "@mui/material/IconButton";
-import TextField from "@mui/material/TextField";
-import ImageUrl from '../../assets/image/StockCake.jpg'
 import Livre1 from '../../assets/image/livre9.jpeg' 
 import Livre2 from '../../assets/image/livre1.jpeg'
 import Livre3 from '../../assets/image/livre2.jpg'
@@ -20,7 +16,7 @@ import { NavLink } from 'react-router-dom'
 
 // Header Component
 const Header = () => (
-  <AppBar position="static" color="default" >
+  <AppBar position="fixed" color="default" >
     <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
       {/* Titre aligné à gauche */}
       <Typography variant="h6" style={{ flexGrow: 1 }}>
