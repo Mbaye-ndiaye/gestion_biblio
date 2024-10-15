@@ -10,6 +10,7 @@ import {
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../actions/authActions"; // import the register action
+import { NavLink } from "react-router-dom";
 
 const theme = createTheme({
   palette: {
@@ -76,12 +77,20 @@ export default function SignUp() {
               alignItems: "center",
             }}
           >
-            <Typography component="h1" variant="h4" sx={{ color: "primary.main", fontWeight: "bold" }}>
+            <Typography
+              component="h1"
+              variant="h4"
+              sx={{ color: "primary.main", fontWeight: "bold" }}
+            >
               SIGN UP
             </Typography>
-            <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-
-            <TextField
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
+              noValidate
+              sx={{ mt: 1 }}
+            >
+              <TextField
                 margin="normal"
                 required
                 fullWidth
@@ -132,14 +141,14 @@ export default function SignUp() {
                 value={formData.password}
                 onChange={handleChange}
               />
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  sx={{ mt: 3, mb: 2, textTransform: "none" }}
-                >
-                  Sign up
-                </Button>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2, textTransform: "none" }}
+              >
+                Sign up
+              </Button>
               <Box sx={{ textAlign: "center" }}>
                 <Typography variant="body2" sx={{ color: "primary.main" }}>
                   Don't have an account? <NavLink to="/">Log in Now</NavLink>
