@@ -6,7 +6,6 @@ import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import CssBaseline from "@mui/material/CssBaseline";
-import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -14,6 +13,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
+import Typography from "@mui/material/Typography";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import DashboardIcon from "@mui/icons-material/Dashboard";
@@ -23,7 +23,7 @@ import MarkunreadIcon from "@mui/icons-material/Markunread";
 import Tooltip from "@mui/material/Tooltip";
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
@@ -167,6 +167,7 @@ function Search() {
 export default function Sidebar() {
   const [open, setOpen] = React.useState(false);
   const [mode, setMode] = React.useState("dark");
+  const location = useLocation();
 
   const theme = React.useMemo(() => getTheme(mode), [mode]);
 
@@ -180,6 +181,21 @@ export default function Sidebar() {
 
   const toggleTheme = () => {
     setMode((prevMode) => (prevMode === "dark" ? "light" : "dark"));
+  };
+
+  const getPageTitle = (path) => {
+    switch (path) {
+      case "/dashboard":
+        return "Dashboard";
+      case "/livre":
+        return "Nombre des Livres";
+      case "/membres":
+        return "Membres";
+      case "/messages":
+        return "Messages";
+      default:
+        return "Sama Livres";
+    }
   };
 
   return (
@@ -208,7 +224,7 @@ export default function Sidebar() {
               component="div"
               sx={{ flexGrow: 1 }}
             >
-              Sama Livres
+              {getPageTitle(location.pathname)}
             </Typography>
             <Search />
             <IconButton color="inherit" onClick={toggleTheme}>
@@ -219,7 +235,13 @@ export default function Sidebar() {
               )}
             </IconButton>
             <NavLink to="/profile">
-              <AccountCircleIcon />
+              <AccountCircleIcon
+                sx={{
+                  fontSize: 35,
+                  color: theme.palette.text.primary,
+                  marginTop: 1,
+                }}
+              />
             </NavLink>
           </Toolbar>
         </AppBar>
@@ -462,9 +484,6 @@ export default function Sidebar() {
           </List>
           <Divider />
         </Drawer>
-        <Box component="main" sx={{ p: 3 }}>
-          {/* <DrawerHeader /> */}
-        </Box>
       </Box>
     </ThemeProvider>
   );
