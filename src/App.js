@@ -8,6 +8,7 @@ import Message from "./pages/admin/Message";
 import Utilisateur from "./pages/utilisateurs/Utilisateur";
 import ProfilePage from "./pages/profil/ProfilePage";
 import Emprunte from "./pages/emprunts/Emprunte";
+import DetailCard from "./pages/detailCard/DetailCard";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,11 @@ const router = createBrowserRouter([
       {
         path: "/emprunts",
         element: <Emprunte />,
+      },
+
+      {
+        path: "/DetailCard",
+        element: <DetailCard />,
       },
     ],
   },
