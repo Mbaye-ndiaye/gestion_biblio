@@ -29,7 +29,7 @@ export const register = (userData) => async (dispatch) => {
 export const login = (credentials)=> async (dispatch) => {
   try {
     const response = await axios.post('http://127.0.0.1:8000/api/login/', credentials);
-    console.log(response)
+    console.log(response.data)
     dispatch({
       type: LOGIN_SUCCESS,
       payload: response.data

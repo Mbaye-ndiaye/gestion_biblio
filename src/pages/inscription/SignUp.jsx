@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import {
   Box,
   Typography,
@@ -9,9 +9,10 @@ import {
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { register } from "../../actions/authActions"; // import the register action
 import Image from "../../assets/image/StockCake.jpg";
+
 
 
 const theme = createTheme({
@@ -32,7 +33,9 @@ export default function SignUp() {
   });
 
   const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth); // Get auth state from Redux
+  const location = useLocation(); 
+  const navigate = useNavigate()
+  const auth = useSelector((state) => state.auth);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -43,6 +46,15 @@ export default function SignUp() {
     // Dispatch the register action
     dispatch(register(formData));
   };
+  
+  useEffect(() => {
+    if (auth.isAuthenticated) {
+      navigate('/', { state: { from: location.pathname } });
+    }
+  }, [auth.isAuthenticated, navigate]); 
+  
+
+
 
   return (
     <ThemeProvider theme={theme}>

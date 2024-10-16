@@ -49,7 +49,7 @@ const handleSubmit = (e) => {
 }
 useEffect(() => {
   if (auth.isAuthenticated) {
-    navigate("/utilisateur");
+    navigate("/dashboard");
   } else if (auth.error) {
     setErrorMessage(auth.error);
   }
@@ -127,7 +127,7 @@ useEffect(() => {
                 autoComplete="current-password"
                 placeholder="Please Enter Your Password here"
               />
-              <NavLink to="/utilisateur">
+              
                 <Button
                   type="submit"
                   fullWidth
@@ -136,7 +136,6 @@ useEffect(() => {
                 >
                   Login
                 </Button>
-              </NavLink>
 
               <Box sx={{ textAlign: "center" }}>
                 <Typography variant="body2" sx={{ color: "primary.main" }}>

@@ -15,7 +15,7 @@ const router = createBrowserRouter([
     element: <Outlet />,
     children: [
       {
-        path: "/loginForm",
+        path: "/",
         element: <LoginForm />,
       },
       {
@@ -62,3 +62,4 @@ function App() {
 }
 
 export default App;
+
