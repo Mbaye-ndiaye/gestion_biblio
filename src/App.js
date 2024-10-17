@@ -45,7 +45,7 @@ const router = createBrowserRouter([
         path: "/utilisateur",
         element: <Utilisateur />,
       },
-
+      
       {
         path: "/profile",
         element: <ProfilePage />,
@@ -55,7 +55,7 @@ const router = createBrowserRouter([
         path: "/emprunts",
         element: <Emprunte />,
       },
-
+      
       {
         path: "/DetailCard/:id", // Route avec paramètre dynamique
         element: <DetailCard />,
@@ -73,3 +73,4 @@ function App() {
 }
 
 export default App;
+

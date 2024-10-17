@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Typography,
@@ -8,8 +8,14 @@ import {
   CssBaseline,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import Image from "../../assets/image/StockCake.jpg";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../actions/authActions";
+
+
+// import { Password } from "@mui/icons-material";
+
 
 const theme = createTheme({
   palette: {
@@ -20,6 +26,37 @@ const theme = createTheme({
 });
 
 export default function LoginForm() {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  })
+  const [errorMessage, setErrorMessage] = useState('');
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData, 
+      [e.target.name]: e.target.value
+    });
+  }
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  dispatch(login(formData))
+
+}
+useEffect(() => {
+  if (auth.isAuthenticated) {
+    navigate("/dashboard");
+  } else if (auth.error) {
+    setErrorMessage(auth.error);
+  }
+}, [auth.isAuthenticated, auth.error, navigate]);
+
+
+
   return (
     <ThemeProvider theme={theme}>
       <Box
@@ -63,7 +100,7 @@ export default function LoginForm() {
             >
               LOG IN
             </Typography>
-            <Box component="form" noValidate sx={{ mt: 1 }}>
+            <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
@@ -71,6 +108,8 @@ export default function LoginForm() {
                 id="email"
                 label="Email"
                 name="email"
+                value={formData.email}
+                onChange={handleChange}
                 autoComplete="email"
                 autoFocus
                 placeholder="Enter Your Email here"
@@ -83,10 +122,12 @@ export default function LoginForm() {
                 label="Password"
                 type="password"
                 id="password"
+                value={formData.password}
+                onChange={handleChange}
                 autoComplete="current-password"
                 placeholder="Please Enter Your Password here"
               />
-              <NavLink to="/utilisateur">
+              
                 <Button
                   type="submit"
                   fullWidth
@@ -95,7 +136,6 @@ export default function LoginForm() {
                 >
                   Login
                 </Button>
-              </NavLink>
 
               <Box sx={{ textAlign: "center" }}>
                 <Typography variant="body2" sx={{ color: "primary.main" }}>
