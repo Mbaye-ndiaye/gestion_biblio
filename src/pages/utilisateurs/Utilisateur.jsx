@@ -1,10 +1,7 @@
 import React from "react";
 import {
-  AppBar,
-  Toolbar,
   Typography,
   InputBase,
-  Button,
   Card,
   CardContent,
   CardMedia,
@@ -12,8 +9,7 @@ import {
   Box,
 } from "@mui/material";
 import {
-  Search as SearchIcon,
-  ShoppingCart as ShoppingCartIcon,
+  Search as SearchIcon, 
 } from "@mui/icons-material";
 import { styled } from "@mui/material/styles";
 import Image from "../../assets/image/StockCake.jpg";
@@ -34,7 +30,6 @@ const Search = styled("div")(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
   backgroundColor: "white",
   marginLeft: 0,
-  borderRadius: 20,
   width: 250,
   height: 45,
   [theme.breakpoints.up("sm")]: {
