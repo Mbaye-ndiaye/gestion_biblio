@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import {
-  AppBar,
-  Toolbar,
   Typography,
   Container,
   List,
@@ -14,10 +12,9 @@ import {
   Divider,
   Avatar,
   ListItemAvatar,
-  Button,
   
 } from '@mui/material'
-import { Search as SearchIcon, ArrowForward as ArrowForwardIcon, ArrowBack } from '@mui/icons-material'
+import { Search as SearchIcon, ArrowForward as ArrowForwardIcon } from '@mui/icons-material'
 import Livre5 from '../../assets/image/livre4.jpeg'
 import Livre6 from '../../assets/image/livre5.jpeg'
 import Livre7 from '../../assets/image/livre6.jpeg'

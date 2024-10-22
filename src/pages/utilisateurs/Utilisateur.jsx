@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { AppBar, Toolbar, Typography, InputBase, Button, Card, CardContent, CardMedia, Grid, IconButton, Box, Select, MenuItem, FormControl, Rating  } from '@mui/material'
+import {  Typography, InputBase, Button, Card, CardContent, CardMedia, Grid, Box, Rating  } from '@mui/material'
 import { Search as SearchIcon, ShoppingCart as ShoppingCartIcon } from '@mui/icons-material'
 import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 import { styled } from '@mui/material/styles';
