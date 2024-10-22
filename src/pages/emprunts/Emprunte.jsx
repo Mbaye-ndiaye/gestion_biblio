@@ -17,13 +17,13 @@ import {
   Button,
   
 } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
 import { Search as SearchIcon, ArrowForward as ArrowForwardIcon, ArrowBack } from '@mui/icons-material'
 import Livre5 from '../../assets/image/livre4.jpeg'
 import Livre6 from '../../assets/image/livre5.jpeg'
 import Livre7 from '../../assets/image/livre6.jpeg'
 import Livre8 from '../../assets/image/livre7.jpeg'
 import Livre9 from '../../assets/image/livre8.jpeg'
+import Header from '../../components/navBarUtilisateur/Header'
 
 // Données factices pour les livres empruntés
 const livresEmpruntes = [
@@ -41,7 +41,6 @@ const livresEmpruntes = [
 
 export default function Emprunte() {
   const [recherche, setRecherche] = useState('')
-  const navigate = useNavigate()
 
   const livresFiltres = livresEmpruntes.filter(livre =>
     livre.titre.toLowerCase().includes(recherche.toLowerCase()) ||
@@ -50,22 +49,8 @@ export default function Emprunte() {
 
   return (
     <>
-      <AppBar position="static" style={{ backgroundColor: "#000" }}>
-        <Toolbar>
-        <Button
-            variant="contained"
-            color="black"
-            // Place le bouton à droite
-            onClick={() => navigate('/utilisateur')} // Redirige vers la page d'accueil
-          >
-            <ArrowBack />
-          </Button>
-          <Typography variant="h6">
-            Mes Emprunts
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Container maxWidth="md" sx={{ mt: 4 }}>
+      <Header/>
+      <Container maxWidth="md" sx={{ mt: 10 }}>
         <Paper
           component="form"
           sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', mb: 2 }}

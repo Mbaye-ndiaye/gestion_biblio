@@ -35,7 +35,7 @@ const DetailCard = () => {
   const book = books.find((b) => b.id === parseInt(id));
 
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'center', mt: 20 }}>
+    <Box sx={{ display: 'flex', justifyContent: 'center', mt: 15}}>
       {book ? (
         <Card sx={{ maxWidth: 900, display: 'flex', padding: 3 }}>
           {/* Book Cover */}

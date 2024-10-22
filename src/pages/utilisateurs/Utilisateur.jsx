@@ -3,7 +3,6 @@ import { AppBar, Toolbar, Typography, InputBase, Button, Card, CardContent, Card
 import { Search as SearchIcon, ShoppingCart as ShoppingCartIcon } from '@mui/icons-material'
 import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 import { styled } from '@mui/material/styles';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Footer from '../../components/Footer/footer';
 import Image from "../../assets/image/StockCake.jpg";
 // import Livre1 from '../../assets/image/livre9.jpeg' 
@@ -16,83 +15,10 @@ import Livre7 from '../../assets/image/livre6.jpeg'
 import Livre8 from '../../assets/image/livre7.jpeg'
 import Livre9 from '../../assets/image/livre8.jpeg'
 import { NavLink } from 'react-router-dom'
+import Header from '../../components/navBarUtilisateur/Header';
 
 
-function Header() {
-  const [category, setCategory] = useState('');
 
-  const handleCategoryChange = (event) => {
-    setCategory(event.target.value);
-  };
-
-  return (
-    <AppBar position="fixed" sx={{ backgroundColor: 'white', boxShadow: 'none', padding: '8px 16px' }}>
-      <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        {/* Left section: Logo and Title */}
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', backgroundColor: '#F97316', padding: '8px', borderRadius: '4px' }}>
-            <Typography variant="h6" sx={{ color: 'white' }}>tX</Typography>
-          </Box>
-          <Typography variant="h6" sx={{ marginLeft: '8px', color: 'black', fontWeight: 'bold' }}>
-          Tànkub xam-xam
-          </Typography>
-        </Box>
-
-        <Box sx={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
-          <Button sx={{ color: '#F97316' }}>Home</Button>
-
-          {/* Categories Select */}
-          <FormControl variant="standard">
-            <Select
-              value={category}
-              onChange={handleCategoryChange}
-              displayEmpty
-              sx={{ minWidth: 120, color: 'black', borderColor: 'black' }}
-              renderValue={(selected) => {
-                if (selected.length === 0) {
-                  return <Typography sx={{ color: 'black' }}>Categories</Typography>;
-                }
-                return selected;
-              }}
-              >
-              <MenuItem value="">
-                <em>Categories</em>
-              </MenuItem>
-              <MenuItem value="electronics">Electronics</MenuItem>
-              <MenuItem value="fashion">Fashion</MenuItem>
-              <MenuItem value="home-appliances">Home Appliances</MenuItem>
-              <MenuItem value="books">Books</MenuItem>
-            </Select>
-          </FormControl>
-
-          <NavLink to="/emprunts"> 
-              <Button sx={{ color: 'black' }}>Emprunte</Button>
-          </NavLink>   
-          <Button sx={{ color: 'black' }}>Livres</Button>
-        </Box>
-
-        {/* Right section: Icons */}
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <IconButton>
-            <SearchIcon sx={{ color: 'black' }} />
-          </IconButton>
-          <IconButton>
-            <ShoppingCartIcon sx={{ color: 'black' }} />
-          </IconButton>
-
-            {/* Center section: Navigation Links */}
-
-          <NavLink to="/">
-          <Button variant="outlined" sx={{ color: '#F97316', borderColor: '#F97316' }}>
-            <AccountCircleIcon sx={{ marginRight: '8px' }} />
-            Login
-          </Button>
-          </NavLink>
-        </Box>
-      </Toolbar>
-    </AppBar>
-  );
-}
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -235,7 +161,7 @@ export default function BookStore() {
   ];
 
   // État pour gérer combien de livres sont affichés
-  const [visibleBooks, setVisibleBooks] = useState(8);
+  const [visibleBooks, setVisibleBooks] = useState(10);
 
   // Fonction pour charger plus de livres
   const loadMoreBooks = () => {
@@ -244,7 +170,7 @@ export default function BookStore() {
 
   return (
     <Box>
-      <Header />
+      <Header/>
       <FeaturedBook />
       <Typography variant="h5" style={{ margin: '20px 0' }}>Nouveaux arrivages</Typography>
       <Grid container spacing={2} sx={{ p: 8 }} columns={12}>
