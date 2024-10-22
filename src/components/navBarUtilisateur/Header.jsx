@@ -1,23 +1,19 @@
 import React, { useState } from "react";
-import { AppBar, Toolbar, InputBase, Drawer } from "@mui/material";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import CardActionArea from "@mui/material/CardActionArea";
-import CardActions from "@mui/material/CardActions";
-import Box from "@mui/material/Box";
+import { AppBar, Drawer, Toolbar, Button, IconButton, Box, Select, CardContent, CardMedia, MenuItem, FormControl, Typography, List, ListItem, ListItemText } from "@mui/material";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { Search as SearchIcon, ShoppingCart as ShoppingCartIcon, Menu as MenuIcon } from "@mui/icons-material";
+import { NavLink } from "react-router-dom";
 import ImageCard from "../../assets/image/livre1.jpeg";
 
-import {
-  Search as SearchIcon,
-  ShoppingCart as ShoppingCartIcon,
-} from "@mui/icons-material";
-import { NavLink } from "react-router-dom";
-
-// Header Component
 export default function Header() {
+  const [category, setCategory] = useState('');
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false); // State for mobile menu drawer
+
+  const handleCategoryChange = (event) => {
+    setCategory(event.target.value);
+  };
 
   const handleDrawerOpen = () => {
     setDrawerOpen(true);
@@ -26,77 +22,137 @@ export default function Header() {
   const handleDrawerClose = () => {
     setDrawerOpen(false);
   };
+
+  const handleMobileMenuOpen = () => {
+    setMobileOpen(true);
+  };
+
+  const handleMobileMenuClose = () => {
+    setMobileOpen(false);
+  };
+
   return (
     <>
-      <AppBar position="static" color="default">
-        <Toolbar style={{ display: "flex", justifyContent: "space-between" }}>
-          {/* Titre aligné à gauche */}
-          <Typography variant="h6" style={{ flexGrow: 1 }}>
-            Tànkub xam-xam
-          </Typography>
+      <AppBar position="fixed" sx={{ backgroundColor: 'white', boxShadow: 'none', padding: '8px 16px' }}>
+        <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          {/* Left section: Logo and Title */}
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', backgroundColor: '#F97316', padding: '8px', borderRadius: '4px' }}>
+              <Typography variant="h6" sx={{ color: 'white' }}>tX</Typography>
+            </Box>
+            <Typography variant="h6" sx={{ marginLeft: '8px', color: 'black', fontWeight: 'bold' }}>
+              Tànkub xam-xam
+            </Typography>
+          </Box>
 
-          <div style={{ marginRight: "auto" }}>
-            <Button color="inherit" variant="contained">
-              <NavLink
-                to="/emprunts"
-                style={{ textDecoration: "none", color: "black" }}
+          {/* Desktop Menu: Buttons */}
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: '20px', alignItems: 'center' }}>
+            <NavLink to="/utilisateur">
+
+            <Button sx={{ color: '#F97316' }}>Home</Button>
+            </NavLink>
+
+            {/* Categories Select */}
+            <FormControl variant="standard">
+              <Select
+                value={category}
+                onChange={handleCategoryChange}
+                displayEmpty
+                sx={{ minWidth: 120, color: 'black', borderColor: 'black' }}
+                renderValue={(selected) => {
+                  if (selected.length === 0) {
+                    return <Typography sx={{ color: 'black' }}>Categories</Typography>;
+                  }
+                  return selected;
+                }}
               >
-                Mes Empruntes
-              </NavLink>
-            </Button>
-            <Button
-              color="inherit"
-              variant="contained"
-              style={{ margin: "auto" }}
-            >
-              <NavLink
-                to="/emprunts"
-                style={{ textDecoration: "none", color: "black" }}
-              >
-                Mes livres
-              </NavLink>
-            </Button>
-          </div>
-          {/* Bouton centré */}
+                <MenuItem value="">
+                  <em>Categories</em>
+                </MenuItem>
+                <MenuItem value="electronics">Electronics</MenuItem>
+                <MenuItem value="fashion">Fashion</MenuItem>
+                <MenuItem value="home-appliances">Home Appliances</MenuItem>
+                <MenuItem value="books">Books</MenuItem>
+              </Select>
+            </FormControl>
 
-          {/* Recherche alignée à droite */}
-          <div style={{ display: "flex", marginLeft: "auto" }}>
-            <InputBase
-              placeholder="Search..."
-              style={{
-                marginRight: "10px",
-                border: "1px solid #ccc",
-                borderRadius: "4px",
-                padding: "5px",
-              }}
-            />
-            <SearchIcon />
-          </div>
+            <NavLink to="/emprunts"> 
+              <Button sx={{ color: 'black' }}>Emprunte</Button>
+            </NavLink>   
+            <Button sx={{ color: 'black' }}>Livres</Button>
+          </Box>
 
-          {/* Boutons avec des marges */}
-          <NavLink
-            to="/"
-            style={{
-              textDecoration: "none",
-              color: "black",
-              marginLeft: "20px",
-            }}
-          >
-            <Button color="inherit" variant="contained">
-              Login
-            </Button>
-          </NavLink>
+          {/* Right section: Icons */}
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
 
-          <Button
-            color="inherit"
-            variant="contained"
-            style={{ marginLeft: "20px" }}
-            onClick={handleDrawerOpen}
-          >
-            <ShoppingCartIcon /> My basket
-          </Button>
+            <IconButton>
+              <ShoppingCartIcon sx={{ color: 'black' }} onClick={handleDrawerOpen} />
+            </IconButton>
+
+            {/* Login Button */}
+            <NavLink to="/">
+              <Button variant="outlined" sx={{ color: '#F97316', borderColor: '#F97316' }}>
+                <AccountCircleIcon sx={{ marginRight: '8px' }} />
+                Login
+              </Button>
+            </NavLink>
+
+            {/* Mobile Hamburger Menu Icon */}
+            <IconButton sx={{ display: { xs: 'block', md: 'none' } }} onClick={handleMobileMenuOpen}>
+              <MenuIcon sx={{ color: 'black' }} />
+            </IconButton>
+          </Box>
         </Toolbar>
       </AppBar>
+
+      {/* Mobile Menu Drawer */}
+      <Drawer anchor="left" open={mobileOpen} onClose={handleMobileMenuClose}>
+        <Box
+          sx={{ width: 250 }}
+          role="presentation"
+          onClick={handleMobileMenuClose}
+          onKeyDown={handleMobileMenuClose}
+        >
+          <List>
+            <ListItem button>
+              <ListItemText primary="Home" />
+            </ListItem>
+            <ListItem button>
+              <ListItemText primary="Emprunte" />
+            </ListItem>
+            <ListItem button>
+              <ListItemText primary="Livres" />
+            </ListItem>
+            <ListItem>
+              {/* Categories in Drawer */}
+              <FormControl fullWidth>
+                <Select
+                  value={category}
+                  onChange={handleCategoryChange}
+                  displayEmpty
+                  sx={{ minWidth: 120 }}
+                  renderValue={(selected) => {
+                    if (selected.length === 0) {
+                      return <Typography>Categories</Typography>;
+                    }
+                    return selected;
+                  }}
+                >
+                  <MenuItem value="">
+                    <em>Categories</em>
+                  </MenuItem>
+                  <MenuItem value="electronics">Electronics</MenuItem>
+                  <MenuItem value="fashion">Fashion</MenuItem>
+                  <MenuItem value="home-appliances">Home Appliances</MenuItem>
+                  <MenuItem value="books">Books</MenuItem>
+                </Select>
+              </FormControl>
+            </ListItem>
+          </List>
+        </Box>
+      </Drawer>
+
+      {/* Drawer for Basket */}
       <Drawer anchor="right" open={drawerOpen} onClose={handleDrawerClose}>
         <Box
           sx={{ width: 250 }}
@@ -107,7 +163,7 @@ export default function Header() {
           <Typography variant="h6" sx={{ m: 2 }}>
             My Basket
           </Typography>
-          {/* Contenu du panier ici */}
+          {/* Content of the basket */}
           <Box sx={{ p: 2 }}>
             <Box sx={{ maxWidth: 345 }}>
               <CardActionArea sx={{ display: "flex", gap: 3 }}>
@@ -124,7 +180,6 @@ export default function Header() {
                   </Typography>
                 </CardContent>
               </CardActionArea>
-              <CardActions></CardActions>
             </Box>
           </Box>
           <NavLink
