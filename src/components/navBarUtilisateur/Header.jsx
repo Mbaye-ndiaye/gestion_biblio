@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import CardActionArea from "@mui/material/CardActionArea";
 import { AppBar, Drawer, Toolbar, Button, IconButton, Box, Select, CardContent, CardMedia, MenuItem, FormControl, Typography, List, ListItem, ListItemText } from "@mui/material";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { Search as SearchIcon, ShoppingCart as ShoppingCartIcon, Menu as MenuIcon } from "@mui/icons-material";
+import { ShoppingCart as ShoppingCartIcon, Menu as MenuIcon } from "@mui/icons-material";
 import { NavLink } from "react-router-dom";
 import ImageCard from "../../assets/image/livre1.jpeg";
 

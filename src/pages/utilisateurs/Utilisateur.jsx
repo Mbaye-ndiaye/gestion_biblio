@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
-import { AppBar, Toolbar, Typography, InputBase, Button, Card, CardContent, CardMedia, Grid, IconButton, Box, Select, MenuItem, FormControl, Rating  } from '@mui/material'
-import { Search as SearchIcon, ShoppingCart as ShoppingCartIcon } from '@mui/icons-material'
+import {  Typography,  Button, Card, CardContent, CardMedia, Grid, Box, Rating  } from '@mui/material'
+import { Search as  ShoppingCartIcon } from '@mui/icons-material'
 import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
-import { styled } from '@mui/material/styles';
 import Footer from '../../components/Footer/footer';
-import Image from "../../assets/image/StockCake.jpg";
-// import Livre1 from '../../assets/image/livre9.jpeg' 
+import FeatureBook from '../../components/banner/FeatureBook';
 import Livre2 from '../../assets/image/livre1.jpeg'
 import Livre3 from '../../assets/image/livre2.jpg'
 import Livre4 from '../../assets/image/livre3.jpeg'
@@ -17,83 +15,6 @@ import Livre9 from '../../assets/image/livre8.jpeg'
 import { NavLink } from 'react-router-dom'
 import Header from '../../components/navBarUtilisateur/Header';
 
-
-
-
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: "white",
-  marginLeft: 0,
-  width: 250,
-  height: 45,
-  marginTop: 25,
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(1),
-    width: 'auto',
-  },
-}));
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  width: 500,
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(2, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    [theme.breakpoints.up('sm')]: {
-      width: '12ch',
-      '&:focus': {
-        width: '20ch',
-      },
-    },
-  },
-}));
-
-// Featured Book Component
-const FeaturedBook = ({ title, author, description, imageUrl }) => (
-  <Box
-        sx={{
-          backgroundImage: `url(${Image})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover", // Pour que l'image couvre toute la zone
-          backgroundPosition: "center", // Pour centrer l'image de fond
-          minHeight: "75vh", // Le box prend au moins toute la hauteur de la fenêtre
-          display: "flex",
-          justifyContent: "center", // Pour centrer le contenu horizontalement
-          alignItems: "center",
-        }}
-      >
-        <Box>
-        <Typography variant='h3' style={{ color: "white", textAlign: "center" }}>
-        Unleash Your Creativity <Typography variant='h3' style={{ color: "white", textAlign: "center" }}>With The Power Of A Book</Typography> 
-        </Typography>
-        <Typography variant='h6' style={{ color: "white", textAlign: "center", maxWidth: 600, margin: "auto", }}>
-        this should be used to tell a story and allow your users to know a little more about your product or service.
-        </Typography>
-        <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search>
-        </Box>
-      </Box>
-)
 
 
 
@@ -171,7 +92,7 @@ export default function BookStore() {
   return (
     <Box>
       <Header/>
-      <FeaturedBook />
+      <FeatureBook />
       <Typography variant="h5" style={{ margin: '20px 0' }}>Nouveaux arrivages</Typography>
       <Grid container spacing={2} sx={{ p: 8 }} columns={12}>
         {books.slice(0, visibleBooks).map((book, index) => (

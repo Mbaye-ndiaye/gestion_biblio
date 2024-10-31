@@ -1,7 +1,5 @@
 import { useParams } from 'react-router-dom';
-// import { Card, CardMedia, CardContent, Typography, Box } from '@mui/material';
 import { Card, CardMedia, CardContent, Typography, Box, Avatar, Rating, Button, Chip, Stack } from '@mui/material';
-// import Livre1 from '../../assets/image/livre9.jpeg';
 import Livre1 from '../../assets/image/livre9.jpeg';
 import Livre2 from '../../assets/image/livre1.jpeg';
 import Livre3 from '../../assets/image/livre2.jpg';
@@ -11,6 +9,11 @@ import Livre6 from '../../assets/image/livre5.jpeg';
 import Livre7 from '../../assets/image/livre6.jpeg';
 import Livre8 from '../../assets/image/livre7.jpeg';
 import Livre9 from '../../assets/image/livre8.jpeg';
+import Header from '../../components/navBarUtilisateur/Header';
+import FeaturedBook from '../../components/banner/FeatureBook';
+import Footer from '../../components/Footer/footer';
+
+
 
 
 
@@ -35,6 +38,9 @@ const DetailCard = () => {
   const book = books.find((b) => b.id === parseInt(id));
 
   return (
+    <Box>
+    <Header/>
+    <FeaturedBook/>
     <Box sx={{ display: 'flex', justifyContent: 'center', mt: 15}}>
       {book ? (
         <Card sx={{ maxWidth: 900, display: 'flex', padding: 3 }}>
@@ -108,6 +114,8 @@ const DetailCard = () => {
           Livre non trouvé
         </Typography>
       )}
+    </Box>
+    <Footer/>
     </Box>
   );
 }
