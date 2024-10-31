@@ -42,13 +42,16 @@ export default function SignUp() {
     e.preventDefault();
     // Dispatch the register action
     dispatch(register(formData));
-  };
-  
-  useEffect(() => {
     if (auth.isAuthenticated) {
       navigate("/");
     }
-  }, [auth.isAuthenticated, navigate]); 
+  };
+  
+  // useEffect(() => {
+  //   if (auth.isAuthenticated) {
+  //     navigate("/dashboard");
+  //   }
+  // }, [auth.isAuthenticated, navigate]); 
   
 
 
