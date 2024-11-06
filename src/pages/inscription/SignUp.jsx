@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import {
   Box,
   Typography,
@@ -9,10 +9,9 @@ import {
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { register } from "../../actions/authActions"; // import the register action
 import Image from "../../assets/image/StockCake.jpg";
-
 
 const theme = createTheme({
   palette: {
@@ -31,8 +30,9 @@ export default function SignUp() {
     password: "",
   });
 
-  const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth); // Get auth state from Redux
+  const dispatch = useDispatch(); 
+  const navigate = useNavigate()
+  const auth = useSelector((state) => state.auth);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -43,6 +43,15 @@ export default function SignUp() {
     // Dispatch the register action
     dispatch(register(formData));
   };
+  
+  useEffect(() => {
+    if (auth.isAuthenticated) {
+      navigate("/");
+    }
+  }, [auth.isAuthenticated, navigate]); 
+  
+
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -79,12 +88,20 @@ export default function SignUp() {
               alignItems: "center",
             }}
           >
-            <Typography component="h1" variant="h4" sx={{ color: "primary.main", fontWeight: "bold" }}>
+            <Typography
+              component="h1"
+              variant="h4"
+              sx={{ color: "primary.main", fontWeight: "bold" }}
+            >
               SIGN UP
             </Typography>
-            <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-
-            <TextField
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
+              noValidate
+              sx={{ mt: 1 }}
+            >
+              <TextField
                 margin="normal"
                 required
                 fullWidth
@@ -135,14 +152,14 @@ export default function SignUp() {
                 value={formData.password}
                 onChange={handleChange}
               />
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  sx={{ mt: 3, mb: 2, textTransform: "none" }}
-                >
-                  Sign up
-                </Button>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2, textTransform: "none" }}
+              >
+                Sign up
+              </Button>
               <Box sx={{ textAlign: "center" }}>
                 <Typography variant="body2" sx={{ color: "primary.main" }}>
                   Don't have an account? <NavLink to="/">Log in Now</NavLink>

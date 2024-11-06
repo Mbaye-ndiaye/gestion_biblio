@@ -13,9 +13,9 @@ export default function Membres() {
             headerValues={["Nom", "Age", "Pays", "Role", "Action"]}
             rows={[
               {
-                name: "Santos",
-                age: 24,
-                country: "Cap Verd",
+                name: "santos",
+                age: 25,
+                country: "sénégal",
                 role: "Developer",
                 action: "detail",
               },
@@ -24,7 +24,6 @@ export default function Membres() {
                 age: 30,
                 country: "mali",
                 role: "Designer",
-                action: "detail",
               },
             ]}
           />

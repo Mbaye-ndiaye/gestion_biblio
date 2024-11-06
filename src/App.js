@@ -8,6 +8,8 @@ import Message from "./pages/admin/Message";
 import Utilisateur from "./pages/utilisateurs/Utilisateur";
 import ProfilePage from "./pages/profil/ProfilePage";
 import Emprunte from "./pages/emprunts/Emprunte";
+import DetailCard from "./pages/detailCard/DetailCard";
+import Panier from "./pages/utilisateurs/panier/Panier";
 
 const router = createBrowserRouter([
   {
@@ -43,7 +45,7 @@ const router = createBrowserRouter([
         path: "/utilisateur",
         element: <Utilisateur />,
       },
-
+      
       {
         path: "/profile",
         element: <ProfilePage />,
@@ -52,6 +54,15 @@ const router = createBrowserRouter([
       {
         path: "/emprunts",
         element: <Emprunte />,
+      },
+      
+      {
+        path: "/DetailCard/:id", // Route avec paramètre dynamique
+        element: <DetailCard />,
+      },
+      {
+        path: "/Panier",
+        element: <Panier />,
       },
     ],
   },
@@ -62,3 +73,4 @@ function App() {
 }
 
 export default App;
+
