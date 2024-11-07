@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { Grid, Box, Typography, Modal } from "@mui/material";
+import React, { useState, useEffect } from "react";
+import { Grid, Box, Typography, Modal, TextField } from "@mui/material";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Tables from "../../components/table/Table";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import TextField from "@mui/material/TextField";
+import { useDispatch, useSelector } from "react-redux";
+import { addBook, fetchBooks } from "../../actions/Books/bookSlice";
 
 const modalStyle = {
   position: "absolute",
@@ -21,14 +22,55 @@ const modalStyle = {
 
 export default function Livre() {
   const [modalOpen, setModalOpen] = useState(false);
+  const dispatch = useDispatch();
 
-  const handleModalOpen = () => {
-    setModalOpen(true);
-  };
+  const books = useSelector((state) => state.books.books); // Récupérer les livres de l'état global
 
+  useEffect(() => {
+    dispatch(fetchBooks()); // Charger les livres lors du montage du composant
+  }, [dispatch]);
+
+  // État pour chaque champ du formulaire
+  const [title, setTitle] = useState("");
+  const [author, setAuthor] = useState("");
+  const [category, setCategory] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
+  const [cover_image, setImageCover] = useState(null);
+  const [total_copies, setTotal] = useState("");
+  const [available_copies, setAvailable] = useState("");
+
+
+  const handleModalOpen = () => setModalOpen(true);
   const handleModalClose = () => {
+    setTitle("");
+    setAuthor("");
+    setCategory("");
+    setDescription("");
+    setPrice("");
+    setImageCover("");
+    setTotal("");
+    setAvailable("");
     setModalOpen(false);
   };
+
+  const handleSave = () => {
+    const newBook = {
+      title,
+      author,
+      category,
+      description,
+      price: parseFloat(price),
+      cover_image, // Contient le fichier image
+      total_copies: parseInt(total_copies, 10),
+      available_copies: parseInt(available_copies, 10)
+    };
+  
+    // Dispatch pour ajouter le livre dans Redux
+    dispatch(addBook(newBook));
+    handleModalClose();
+  };
+
 
   return (
     <>
@@ -52,79 +94,97 @@ export default function Livre() {
             <AddCircleIcon sx={{ fontSize: "35px" }} />
           </Typography>
           <Tables
-            headerValues={["Name", "Age", "Country", "Role"]}
-            rows={[
-              { name: "John Doe", age: 25, country: "USA", role: "Developer" },
-              {
-                name: "Jane Smith",
-                age: 30,
-                country: "Canada",
-                role: "Designer",
-              },
-            ]}
+            headerValues={["Id", "Title", "Author", "Category", "Description", "Price", "Image", "Total", "Available Copie"]}
+            rows={Array.isArray(books) ? books : []}
           />
+
         </Box>
       </Box>
       <Modal open={modalOpen} onClose={handleModalClose}>
         <Box sx={modalStyle}>
-          {/* Contenu du modal ici */}
           <Box sx={{ p: 2 }}>
             <Box component="form" noValidate sx={{ mt: 3, maxWidth: 945 }}>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
-                    autoComplete="given-name"
-                    name="firstName"
                     required
                     fullWidth
-                    id="firstName"
-                    label="First Name"
-                    autoFocus
-                    defaultValue="Ladji"
+                    id="title"
+                    label="Title"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
                     required
                     fullWidth
-                    id="lastName"
-                    label="Last Name"
-                    name="lastName"
-                    autoComplete="family-name"
-                    defaultValue="Timera"
+                    id="author"
+                    label="Author"
+                    value={author}
+                    onChange={(e) => setAuthor(e.target.value)}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
                     required
                     fullWidth
-                    id="email"
-                    label="Email"
-                    name="email"
-                    autoComplete="email"
-                    defaultValue="tims7788@gmail.com"
+                    id="category"
+                    label="Category"
+                    value={category}
+                    onChange={(e) => setCategory(e.target.value)}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
                     required
                     fullWidth
-                    id="address"
-                    label="Address"
-                    name="address"
-                    autoComplete="address"
-                    defaultValue="mbao"
+                    id="description"
+                    label="Description"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
                     required
                     fullWidth
-                    id="contactNumber"
-                    label="Contact Number"
-                    name="contactNumber"
-                    autoComplete="contact-number"
-                    defaultValue="787907654"
+                    id="price"
+                    label="Price"
+                    type="number"
+                    value={price}
+                    onChange={(e) => setPrice(e.target.value)}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="image-cover"
+                    name="image-cover"
+                    type="file"
+                    onChange={(e) => setImageCover(e.target.files[0])}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="total_copies"
+                    label="Total"
+                    type="number"
+                    value={total_copies}
+                    onChange={(e) => setTotal(e.target.value)}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    required
+                    fullWidth
+                    id="available_copies"
+                    label="Available_copies"
+                    type="number"
+                    onChange={(e) => setAvailable(e.target.value)}
                   />
                 </Grid>
               </Grid>
@@ -143,7 +203,7 @@ export default function Livre() {
                   cursor: "pointer",
                   marginTop: 3,
                 }}
-                onClick={handleModalOpen}
+                onClick={handleSave} // Liaison du clic au gestionnaire
               >
                 Enregistrer
               </Typography>
