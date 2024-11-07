@@ -8,7 +8,7 @@ export const LOGIN_FAIL = "LOGIN_FAIL";
 export const register = (userData) => async (dispatch) => {
     try {
       // Make an API call to the Django backend
-      const response = await axios.post("http://127.0.0.1:8000/api/register/", userData);
+      const response = await axios.post("https://django-render-22s2.onrender.com/api/register/", userData);
       console.log(response.data)
       // Dispatch success action if registration is successful
       
@@ -21,14 +21,14 @@ export const register = (userData) => async (dispatch) => {
       // Dispatch fail action if there's an error
       dispatch({
         type: REGISTER_FAIL,
-        payload: error.response ? error.response.data : "quelque chase ne va pa", // API error response
+        payload: error.response ? error.response.data : "quelque chose ne va pa", // API error response
       });
     }
   };
 
 export const login = (credentials)=> async (dispatch) => {
   try {
-    const response = await axios.post('http://192.168.68.217:8181/api/login/', credentials);
+    const response = await axios.post('https://django-render-22s2.onrender.com/api/login/', credentials);
     console.log(response.data)
     dispatch({
       type: LOGIN_SUCCESS,
