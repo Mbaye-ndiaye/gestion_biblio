@@ -9,7 +9,7 @@ const Footer = () => {
         {/* Section 1 - Book Info */}
         <Grid item xs={12} md={3}>
           <Box sx={{ alignItems: 'center', mb: 2 }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', backgroundColor: '#F97316', padding: '8px', borderRadius: '4px', width: "45px" }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', backgroundColor: 'blue', padding: '8px', borderRadius: '4px', width: "45px" }}>
             <Typography variant="h6" sx={{ color: 'white' }}>tX</Typography>
           </Box>
             <Typography variant="body1">
@@ -34,7 +34,7 @@ const Footer = () => {
 
         {/* Section 2 - Delivery */}
         <Grid item xs={12} md={2} >
-          <Typography variant="h6" component="div" sx={{ mb: 2, color: '#72db7f' }}>
+          <Typography variant="h6" component="div" sx={{ mb: 2, color: 'blue' }}>
             Delivery
           </Typography>
           <Typography variant="body2">Cost of delivery</Typography>
@@ -46,7 +46,7 @@ const Footer = () => {
 
         {/* Section 3 - Discovery */}
         <Grid item xs={12} md={2} >
-          <Typography variant="h6" component="div" sx={{ mb: 2, color: '#72db7f' }}>
+          <Typography variant="h6" component="div" sx={{ mb: 2, color: 'blue' }}>
             Discovery
           </Typography>
           <Typography variant="body2">Latest News & Blog</Typography>
@@ -58,7 +58,7 @@ const Footer = () => {
 
         {/* Section 4 - Contact */}
         <Grid item xs={12} md={3} >
-          <Typography variant="h6" component="div" sx={{ mb: 2, color: '#72db7f' }}>
+          <Typography variant="h6" component="div" sx={{ mb: 2, color: 'blue' }}>
             Contact Us
           </Typography>
           <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>

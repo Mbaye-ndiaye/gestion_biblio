@@ -74,66 +74,67 @@ export default function Header() {
   };
 
   return (
-      <>
+    <>
         <AppBar position="fixed" sx={{ backgroundColor: 'white', boxShadow: 'none', padding: '8px 16px' }}>
-          <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-            {/* Left section: Logo and Title */}
-            <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <Box sx={{ display: 'flex', alignItems: 'center', backgroundColor: '#F97316', padding: '8px', borderRadius: '4px' }}>
-                <Typography variant="h6" sx={{ color: 'white' }}>tX</Typography>
-              </Box>
-              <Typography variant="h6" sx={{ marginLeft: '8px', color: 'black', fontWeight: 'bold' }}>
-                Tànkub xam-xam
-              </Typography>
+        <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          {/* Left section: Logo and Title */}
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', backgroundColor: 'blue', padding: '8px', borderRadius: '4px' }}>
+              <Typography variant="h6" sx={{ color: 'white' }}>tX</Typography>
             </Box>
+            <Typography variant="h6" sx={{ marginLeft: '8px', color: 'black', fontWeight: 'bold' }}>
+              Tànkub xam-xam
+            </Typography>
+          </Box>
 
-            {/* Desktop Menu: Buttons */}
-            <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: '20px', alignItems: 'center' }}>
-              <NavLink to="/utilisateur">
-                <Button sx={{ color: '#F97316' }}>Home</Button>
-              </NavLink>
+          {/* Desktop Menu: Buttons */}
+          <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: '20px', alignItems: 'center' }}>
+            <NavLink to="/utilisateur">
 
-              {/* Categories Select */}
-              <FormControl variant="standard">
-                <Select
-                    value={category}
-                    onChange={handleCategoryChange}
-                    displayEmpty
-                    sx={{ minWidth: 120, color: 'black', borderColor: 'black' }}
-                    renderValue={(selected) => {
-                      if (selected.length === 0) {
-                        return <Typography sx={{ color: 'black' }}>Categories</Typography>;
-                      }
-                      return selected;
-                    }}
-                >
-                  <MenuItem value="">
-                    <em>Categories</em>
-                  </MenuItem>
-                  <MenuItem value="electronics">Electronics</MenuItem>
-                  <MenuItem value="fashion">Fashion</MenuItem>
-                  <MenuItem value="home-appliances">Home Appliances</MenuItem>
-                  <MenuItem value="books">Books</MenuItem>
-                </Select>
-              </FormControl>
+            <Button sx={{ color: 'blue' }}>Home</Button>
+            </NavLink>
 
-              <NavLink to="/emprunts">
-                <Button sx={{ color: 'black' }}>Emprunte</Button>
-              </NavLink>
-              <Button sx={{ color: 'black' }}>Livres</Button>
-            </Box>
+            {/* Categories Select */}
+            <FormControl variant="standard">
+              <Select
+                value={category}
+                onChange={handleCategoryChange}
+                displayEmpty
+                sx={{ minWidth: 120, color: 'black', borderColor: 'black' }}
+                renderValue={(selected) => {
+                  if (selected.length === 0) {
+                    return <Typography sx={{ color: 'black' }}>Categories</Typography>;
+                  }
+                  return selected;
+                }}
+              >
+                <MenuItem value="">
+                  <em>Categories</em>
+                </MenuItem>
+                <MenuItem value="histoire">Histoire</MenuItem>
+                <MenuItem value="contes">Contes</MenuItem>
+                <MenuItem value="romance">Roman</MenuItem>
+                <MenuItem value="autre">Autres</MenuItem>
+              </Select>
+            </FormControl>
 
-            {/* Right section: Icons */}
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-              <IconButton onClick={handleDrawerOpen}>
-                <ShoppingCartIcon sx={{ color: 'white', backgroundColor: '#F97316', padding: '7px', borderRadius: '10px' }} />
+            <NavLink to="/emprunts"> 
+              <Button sx={{ color: 'black' }}>Emprunte</Button>
+            </NavLink>   
+          </Box>
+
+          {/* Right section: Icons */}
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+
+          <IconButton onClick={handleDrawerOpen}>
+                <ShoppingCartIcon sx={{ color: 'white', backgroundColor: 'blue', padding: '7px', borderRadius: '10px' }} />
                 {itemCount > 0 && (
                     <Box
                         sx={{
                           position: 'absolute',
                           top: '0px',
                           right: '0px',
-                          backgroundColor: 'black',
+                          backgroundColor: 'red',
                           borderRadius: '50%',
                           width: '20px',
                           height: '20px',
@@ -149,68 +150,69 @@ export default function Header() {
                 )}
               </IconButton>
 
-              {/* Login Button */}
-              <NavLink to="/">
-                <Button variant="outlined" sx={{ color: '#F97316', borderColor: '#F97316' }}>
-                  <AccountCircleIcon sx={{ marginRight: '8px' }} />
-                  Login
-                </Button>
-              </NavLink>
+            {/* Login Button */}
+            <NavLink to="/">
+              <Button variant="outlined" sx={{ color: 'blue', borderColor: '#blue' }}>
+                <AccountCircleIcon sx={{ marginRight: '8px' }} />
+                Login
+              </Button>
+            </NavLink>
 
-              {/* Mobile Hamburger Menu Icon */}
-              <IconButton sx={{ display: { xs: 'block', md: 'none' } }} onClick={handleMobileMenuOpen}>
-                <MenuIcon sx={{ color: 'black' }} />
-              </IconButton>
-            </Box>
-          </Toolbar>
-        </AppBar>
-
-        {/* Mobile Menu Drawer */}
-        <Drawer anchor="left" open={mobileOpen} onClose={handleMobileMenuClose}>
-          <Box
-              sx={{ width: 250 }}
-              role="presentation"
-              onClick={handleMobileMenuClose}
-              onKeyDown={handleMobileMenuClose}
-          >
-            <List>
-              <ListItem button>
-                <ListItemText primary="Home" />
-              </ListItem>
-              <ListItem button>
-                <ListItemText primary="Emprunte" />
-              </ListItem>
-              <ListItem button>
-                <ListItemText primary="Livres" />
-              </ListItem>
-              <ListItem>
-                {/* Categories in Drawer */}
-                <FormControl fullWidth>
-                  <Select
-                      value={category}
-                      onChange={handleCategoryChange}
-                      displayEmpty
-                      sx={{ minWidth: 120 }}
-                      renderValue={(selected) => {
-                        if (selected.length === 0) {
-                          return <Typography>Categories</Typography>;
-                        }
-                        return selected;
-                      }}
-                  >
-                    <MenuItem value="">
-                      <em>Categories</em>
-                    </MenuItem>
-                    <MenuItem value="electronics">Electronics</MenuItem>
-                    <MenuItem value="fashion">Fashion</MenuItem>
-                    <MenuItem value="home-appliances">Home Appliances</MenuItem>
-                    <MenuItem value="books">Books</MenuItem>
-                  </Select>
-                </FormControl>
-              </ListItem>
-            </List>
+            {/* Mobile Hamburger Menu Icon */}
+            <IconButton sx={{ display: { xs: 'block', md: 'none' } }} onClick={handleMobileMenuOpen}>
+              <MenuIcon sx={{ color: 'black' }} />
+            </IconButton>
           </Box>
-        </Drawer>
+        </Toolbar>
+      </AppBar>
+
+      {/* Mobile Menu Drawer */}
+      <Drawer anchor="left" open={mobileOpen} onClose={handleMobileMenuClose}>
+        <Box
+          sx={{ width: 250 }}
+          role="presentation"
+          onClick={handleMobileMenuClose}
+          onKeyDown={handleMobileMenuClose}
+        >
+          <List>
+            <ListItem button>
+            <NavLink to="/utilisateur"> 
+              <ListItemText primary="Home" />
+              </NavLink>  
+            </ListItem>
+            <ListItem button>
+            <NavLink to="/emprunts"> 
+              <ListItemText primary="Emprunte" />
+            </NavLink>
+            </ListItem>
+            <ListItem>
+              {/* Categories in Drawer */}
+              <FormControl fullWidth>
+                <Select
+                  value={category}
+                  onChange={handleCategoryChange}
+                  displayEmpty
+                  sx={{ minWidth: 120 }}
+                  renderValue={(selected) => {
+                    if (selected.length === 0) {
+                      return <Typography>Categories</Typography>;
+                    }
+                    return selected;
+                  }}
+                >
+                  <MenuItem value="">
+                    <em>Categories</em>
+                  </MenuItem>
+                  <MenuItem value="histoire">Histoire</MenuItem>
+                  <MenuItem value="contes">Contes</MenuItem>
+                  <MenuItem value="romance">Roman</MenuItem>
+                  <MenuItem value="autre">Autres</MenuItem>
+                </Select>
+              </FormControl>
+            </ListItem>
+          </List>
+        </Box>
+      </Drawer>
 
         {/* Drawer for Basket */}
         <Drawer anchor="right" open={drawerOpen} onClose={handleDrawerClose}>
@@ -286,7 +288,7 @@ export default function Header() {
                         justifyContent: "center",
                         alignItems: "center",
                         color: "white",
-                        backgroundColor: "#F97316",
+                        backgroundColor: "blue",
                         marginLeft: 2,
                         marginRight: 2,
                         marginTop: 5,

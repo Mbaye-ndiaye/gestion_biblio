@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Box, Typography, Modal, TextField } from "@mui/material";
+import { Grid, Box, Typography, Modal, TextField, IconButton } from "@mui/material";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Tables from "../../components/table/Table";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { useDispatch, useSelector } from "react-redux";
-import { addBook, fetchBooks } from "../../actions/Books/bookSlice";
+import { addBook, fetchBooks, updateBook, deleteBook } from "../../actions/Books/bookSlice";
 
 const modalStyle = {
   position: "absolute",
@@ -22,15 +24,8 @@ const modalStyle = {
 
 export default function Livre() {
   const [modalOpen, setModalOpen] = useState(false);
-  const dispatch = useDispatch();
-
-  const books = useSelector((state) => state.books.books); // Récupérer les livres de l'état global
-
-  useEffect(() => {
-    dispatch(fetchBooks()); // Charger les livres lors du montage du composant
-  }, [dispatch]);
-
-  // État pour chaque champ du formulaire
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [editBookId, setEditBookId] = useState(null);
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [category, setCategory] = useState("");
@@ -40,17 +35,40 @@ export default function Livre() {
   const [total_copies, setTotal] = useState("");
   const [available_copies, setAvailable] = useState("");
 
+  const dispatch = useDispatch();
+  const books = useSelector((state) => state.books.books);
 
-  const handleModalOpen = () => setModalOpen(true);
+  useEffect(() => {
+    dispatch(fetchBooks()); // Charger les livres lors du montage du composant
+  }, [dispatch]);
+
+  const handleModalOpen = (book = null) => {
+    if (book) {
+      setIsEditMode(true);
+      setEditBookId(book.id);
+      setTitle(book.title);
+      setAuthor(book.author);
+      setCategory(book.category);
+      setDescription(book.description);
+      setPrice(book.price.toString());
+      setImageCover(book.cover_image);
+      setTotal(book.total_copies.toString());
+      setAvailable(book.available_copies.toString());
+    } else {
+      setIsEditMode(false);
+      setTitle("");
+      setAuthor("");
+      setCategory("");
+      setDescription("");
+      setPrice("");
+      setImageCover(null);
+      setTotal("");
+      setAvailable("");
+    }
+    setModalOpen(true);
+  };
+
   const handleModalClose = () => {
-    setTitle("");
-    setAuthor("");
-    setCategory("");
-    setDescription("");
-    setPrice("");
-    setImageCover("");
-    setTotal("");
-    setAvailable("");
     setModalOpen(false);
   };
 
@@ -61,16 +79,23 @@ export default function Livre() {
       category,
       description,
       price: parseFloat(price),
-      cover_image, // Contient le fichier image
+      cover_image,
       total_copies: parseInt(total_copies, 10),
-      available_copies: parseInt(available_copies, 10)
+      available_copies: parseInt(available_copies, 10),
     };
-  
-    // Dispatch pour ajouter le livre dans Redux
-    dispatch(addBook(newBook));
+
+    if (isEditMode) {
+      const updatedBook = { ...newBook, id: editBookId };
+      dispatch(updateBook(updatedBook));
+    } else {
+      dispatch(addBook(newBook));
+    }
     handleModalClose();
   };
 
+  const handleDelete = (bookId) => {
+    dispatch(deleteBook(bookId));
+  };
 
   return (
     <>
@@ -89,17 +114,33 @@ export default function Livre() {
               marginBottom: 2,
               cursor: "pointer",
             }}
-            onClick={handleModalOpen}
+            onClick={() => handleModalOpen()} // Ouvre le modal pour ajouter un livre
           >
             <AddCircleIcon sx={{ fontSize: "35px" }} />
           </Typography>
           <Tables
-            headerValues={["Id", "Title", "Author", "Category", "Description", "Price", "Image", "Total", "Available Copie"]}
-            rows={Array.isArray(books) ? books : []}
-          />
+            headerValues={["Id", "Title", "Author", "Category", "Description", "Price", "Image", "Total", "Available Copie", "Action"]}
+            rows={Array.isArray(books) ? books.map((book) => ({
+              ...book,
+              actions: (
+                <>
+                  <Box sx={{ display: "flex"}}>
+                    <IconButton onClick={() => handleModalOpen(book)} color="primary">
+                      <EditIcon />
+                    </IconButton>
+                    <IconButton onClick={() => handleDelete(book.id)} color="danger">
+                      <DeleteIcon />
+                    </IconButton>
+                  </Box>
 
+                </>
+              ),
+            })) : []}
+          />
         </Box>
       </Box>
+
+      {/* Modal pour Ajouter/Modifier un livre */}
       <Modal open={modalOpen} onClose={handleModalClose}>
         <Box sx={modalStyle}>
           <Box sx={{ p: 2 }}>
@@ -184,6 +225,7 @@ export default function Livre() {
                     id="available_copies"
                     label="Available_copies"
                     type="number"
+                    value={available_copies}
                     onChange={(e) => setAvailable(e.target.value)}
                   />
                 </Grid>
@@ -205,7 +247,7 @@ export default function Livre() {
                 }}
                 onClick={handleSave} // Liaison du clic au gestionnaire
               >
-                Enregistrer
+                {isEditMode ? "Modifier" : "Enregistrer"}
               </Typography>
             </Box>
           </Box>

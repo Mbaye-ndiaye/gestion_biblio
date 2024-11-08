@@ -1,70 +1,75 @@
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Card, CardMedia, CardContent, Typography, Box, Avatar, Rating, Button, Chip, Stack } from "@mui/material";
+import { Card, CardMedia, CardContent, Typography, Box, Avatar, Rating, Button, Stack, Skeleton } from "@mui/material";
 import Header from "../../components/navBarUtilisateur/Header";
 import FeaturedBook from "../../components/banner/FeatureBook";
 import Footer from "../../components/Footer/footer";
 import { useSelector } from "react-redux";
 
 const DetailCard = () => {
-  const { id } = useParams(); // Récupère l'ID du livre à partir de l'URL
-  const books = useSelector((state) => state.books); // Récupère la liste des livres depuis Redux
-  
-  const book = books.find((b) => b.id === parseInt(id)); // Trouve le livre en fonction de l'ID
+  const { id } = useParams();
+  const books = useSelector((state) => state.books.books);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (books.length > 0) {
+      setLoading(false);
+    }
+  }, [books]);
+
+  const book = Array.isArray(books) ? books.find((b) => b.id === parseInt(id)) : null;
 
   return (
     <Box>
       <Header />
       <FeaturedBook />
       <Box sx={{ display: "flex", justifyContent: "center", mt: 15 }}>
-        {book ? (
-          <Card sx={{ maxWidth: 900, display: "flex", padding: 3 }}>
-            {/* Book Cover */}
+        {loading ? (
+          // Skeleton Loader
+          <Card sx={{ maxWidth: 900, display: "flex", padding: 5, boxShadow: 5 }}>
+            <Skeleton variant="rectangular" width={300} height={250} sx={{ borderRadius: "5px" }} />
+            <CardContent sx={{ paddingLeft: 4, flex: 1 }}>
+              <Skeleton variant="text" width="60%" height={40} />
+              <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
+                <Skeleton variant="circular" width={40} height={40} sx={{ mr: 2 }} />
+                <Skeleton variant="text" width="30%" />
+              </Box>
+              <Skeleton variant="text" width="50%" height={20} />
+              <Skeleton variant="text" width="80%" height={80} sx={{ mt: 2 }} />
+              <Skeleton variant="text" width="40%" />
+              <Box sx={{ mt: 3, display: "flex", gap: 2 }}>
+                <Skeleton variant="rectangular" width={100} height={40} />
+                <Skeleton variant="rectangular" width={100} height={40} />
+              </Box>
+            </CardContent>
+          </Card>
+        ) : book ? (
+          <Card sx={{ maxWidth: 900, display: "flex", padding: 5, boxShadow: 5 }}>
             <CardMedia
               component="img"
               sx={{ width: 300, height: "auto", borderRadius: "5px" }}
-              image={book.image}
+              image={book.cover_image}
               alt={book.title}
+              style={{ height: 250, objectFit: "contain" }}
             />
-            
-            {/* Book Details */}
             <CardContent sx={{ paddingLeft: 4 }}>
-              {/* Title */}
               <Typography variant="h4" gutterBottom>
                 {book.title}
               </Typography>
-              
-              {/* Author Info */}
               <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
                 <Avatar src="/path/to/author/avatar" sx={{ width: 40, height: 40, mr: 2 }} />
                 <Typography variant="body1">{book.author}</Typography>
-                <Chip label={book.rating} color="primary" sx={{ ml: 2 }} />
               </Box>
-
-              {/* Rating and Reviews */}
               <Stack direction="row" alignItems="center" spacing={1}>
                 <Rating name="read-only" value={book.rating} precision={0.5} readOnly />
                 <Typography variant="body2">{book.reviews} reviews</Typography>
               </Stack>
-
-              {/* Description */}
               <Typography variant="body2" color="text.secondary" paragraph sx={{ mt: 2 }}>
                 {book.description}
               </Typography>
-
-              {/* Publisher Information */}
               <Typography variant="subtitle2" color="text.secondary">
                 <strong>Pages:</strong> {book.available_copies}p
               </Typography>
-
-              {/* Edition Options */}
-              <Stack direction="row" spacing={1} sx={{ mt: 2 }}>
-                <Chip label="Kindle" clickable variant={book.edition === "Kindle" ? "filled" : "outlined"} />
-                <Chip label="Paperback" clickable variant={book.edition === "Paperback" ? "filled" : "outlined"} />
-                <Chip label="Hardcover" clickable />
-                <Chip label="Audio" clickable />
-              </Stack>
-
-              {/* Action Buttons */}
               <Box sx={{ mt: 3 }}>
                 <Button variant="contained" color="primary" sx={{ mr: 2 }}>Add to read</Button>
                 <Button variant="outlined">Preview</Button>

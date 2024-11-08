@@ -8,7 +8,7 @@ const initialState = {
 
 // Action pour récupérer les livres depuis l'API
 export const fetchBooks = createAsyncThunk('books/fetchBooks', async () => {
-  const response = await fetch('https://django-render-22s2.onrender.com/api/books/');
+  const response = await fetch(process.env.REACT_APP_API_URL+'books/');
   return await response.json();
 });
 
@@ -26,12 +26,45 @@ export const addBook = createAsyncThunk('books/addBook', async (newBook) => {
   formData.append('total_copies', newBook.total_copies);
   formData.append('available_copies', newBook.available_copies);
 
-  const response = await fetch('https://django-render-22s2.onrender.com/api/books/', {
-      method: 'POST',
-      body: formData,
+
+  const response = await fetch(process.env.REACT_APP_API_URL+'books/', {
+    method: 'POST',
+    body: formData,
+
   });
 
   return await response.json();
+});
+
+// Action pour modifier un livre
+export const updateBook = createAsyncThunk('books/updateBook', async (updatedBook) => {
+  const formData = new FormData();
+  
+  // Ajouter chaque champ à formData
+  formData.append('title', updatedBook.title);
+  formData.append('author', updatedBook.author);
+  formData.append('category', updatedBook.category);
+  formData.append('description', updatedBook.description);
+  formData.append('price', updatedBook.price);
+  formData.append('cover_image', updatedBook.cover_image); // Fichier image
+  formData.append('total_copies', updatedBook.total_copies);
+  formData.append('available_copies', updatedBook.available_copies);
+
+  const response = await fetch(process.env.REACT_APP_API_URL+`books/${updatedBook.id}/`, {
+    method: 'PUT',
+    body: formData,
+  });
+
+  return await response.json(); // Retourne le livre mis à jour
+});
+
+// Action pour supprimer un livre
+export const deleteBook = createAsyncThunk('books/deleteBook', async (bookId) => {
+  await fetch(process.env.REACT_APP_API_URL+`books/${bookId}/`, {
+    method: 'DELETE',
+  });
+
+  return bookId; // Retourne l'ID du livre supprimé
 });
 
 // Création du slice
@@ -41,19 +74,35 @@ const booksSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      // Fetch books actions
       .addCase(fetchBooks.pending, (state) => {
         state.status = 'loading';
       })
       .addCase(fetchBooks.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.books = action.payload; // Met à jour l'état avec les livres récupérés
+        state.books = action.payload;
       })
       .addCase(fetchBooks.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
       })
+      
+      // Add book action
       .addCase(addBook.fulfilled, (state, action) => {
         state.books.push(action.payload); // Ajoute le nouveau livre à l'état
+      })
+      
+      // Update book action
+      .addCase(updateBook.fulfilled, (state, action) => {
+        const index = state.books.findIndex(book => book.id === action.payload.id);
+        if (index !== -1) {
+          state.books[index] = action.payload; // Met à jour le livre modifié dans l'état
+        }
+      })
+      
+      // Delete book action
+      .addCase(deleteBook.fulfilled, (state, action) => {
+        state.books = state.books.filter(book => book.id !== action.payload); // Supprime le livre de l'état
       });
   },
 });
