@@ -8,14 +8,14 @@ const initialState = {
 
 // Action pour récupérer les livres depuis l'API
 export const fetchBooks = createAsyncThunk('books/fetchBooks', async () => {
-  const response = await fetch('http://192.168.68.174:8181/api/books/');
+  const response = await fetch('https://django-render-22s2.onrender.com/api/books/');
   return await response.json();
 });
 
 // Action pour ajouter un livre
 export const addBook = createAsyncThunk('books/addBook', async (newBook) => {
   const formData = new FormData();
-  
+
   // Ajouter chaque champ à formData
   formData.append('title', newBook.title);
   formData.append('author', newBook.author);
@@ -26,7 +26,7 @@ export const addBook = createAsyncThunk('books/addBook', async (newBook) => {
   formData.append('total_copies', newBook.total_copies);
   formData.append('available_copies', newBook.available_copies);
 
-  const response = await fetch('http://192.168.68.174:8181/api/books/', {
+  const response = await fetch('https://django-render-22s2.onrender.com/api/books/', {
       method: 'POST',
       body: formData,
   });
