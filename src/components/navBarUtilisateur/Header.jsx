@@ -37,7 +37,7 @@ export default function Header() {
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
           {/* Left section: Logo and Title */}
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', backgroundColor: '#F97316', padding: '8px', borderRadius: '4px' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', backgroundColor: 'blue', padding: '8px', borderRadius: '4px' }}>
               <Typography variant="h6" sx={{ color: 'white' }}>tX</Typography>
             </Box>
             <Typography variant="h6" sx={{ marginLeft: '8px', color: 'black', fontWeight: 'bold' }}>
@@ -49,7 +49,7 @@ export default function Header() {
           <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: '20px', alignItems: 'center' }}>
             <NavLink to="/utilisateur">
 
-            <Button sx={{ color: '#F97316' }}>Home</Button>
+            <Button sx={{ color: 'blue' }}>Home</Button>
             </NavLink>
 
             {/* Categories Select */}
@@ -69,17 +69,16 @@ export default function Header() {
                 <MenuItem value="">
                   <em>Categories</em>
                 </MenuItem>
-                <MenuItem value="electronics">Electronics</MenuItem>
-                <MenuItem value="fashion">Fashion</MenuItem>
-                <MenuItem value="home-appliances">Home Appliances</MenuItem>
-                <MenuItem value="books">Books</MenuItem>
+                <MenuItem value="histoire">Histoire</MenuItem>
+                <MenuItem value="contes">Contes</MenuItem>
+                <MenuItem value="romance">Roman</MenuItem>
+                <MenuItem value="autre">Autres</MenuItem>
               </Select>
             </FormControl>
 
             <NavLink to="/emprunts"> 
               <Button sx={{ color: 'black' }}>Emprunte</Button>
             </NavLink>   
-            <Button sx={{ color: 'black' }}>Livres</Button>
           </Box>
 
           {/* Right section: Icons */}
@@ -91,7 +90,7 @@ export default function Header() {
 
             {/* Login Button */}
             <NavLink to="/">
-              <Button variant="outlined" sx={{ color: '#F97316', borderColor: '#F97316' }}>
+              <Button variant="outlined" sx={{ color: 'blue', borderColor: '#blue' }}>
                 <AccountCircleIcon sx={{ marginRight: '8px' }} />
                 Login
               </Button>
@@ -115,13 +114,14 @@ export default function Header() {
         >
           <List>
             <ListItem button>
+            <NavLink to="/utilisateur"> 
               <ListItemText primary="Home" />
+              </NavLink>  
             </ListItem>
             <ListItem button>
+            <NavLink to="/emprunts"> 
               <ListItemText primary="Emprunte" />
-            </ListItem>
-            <ListItem button>
-              <ListItemText primary="Livres" />
+            </NavLink>
             </ListItem>
             <ListItem>
               {/* Categories in Drawer */}
@@ -141,10 +141,10 @@ export default function Header() {
                   <MenuItem value="">
                     <em>Categories</em>
                   </MenuItem>
-                  <MenuItem value="electronics">Electronics</MenuItem>
-                  <MenuItem value="fashion">Fashion</MenuItem>
-                  <MenuItem value="home-appliances">Home Appliances</MenuItem>
-                  <MenuItem value="books">Books</MenuItem>
+                  <MenuItem value="histoire">Histoire</MenuItem>
+                  <MenuItem value="contes">Contes</MenuItem>
+                  <MenuItem value="romance">Roman</MenuItem>
+                  <MenuItem value="autre">Autres</MenuItem>
                 </Select>
               </FormControl>
             </ListItem>
