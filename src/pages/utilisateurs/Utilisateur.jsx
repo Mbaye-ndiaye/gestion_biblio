@@ -61,7 +61,7 @@ const BookStore = () => {
       
             {visibleBooks < books.length && (
                 <Box style={{ display: "flex", justifyContent: "center", margin: "auto", width: "150px" }}>
-                    <Button variant="contained" onClick={loadMoreBooks} color="warning" style={{ height: "50px", borderRadius: "50px" }}>
+                    <Button variant="contained" onClick={loadMoreBooks} color="primary" style={{ height: "50px", borderRadius: "50px" }}>
                         Load More
                     </Button>
                 </Box>

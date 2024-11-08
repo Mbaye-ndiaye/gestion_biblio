@@ -5,7 +5,7 @@ import { ShoppingCart as ShoppingCartIcon } from "@mui/icons-material";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import { NavLink } from "react-router-dom";
 
-const BookCard = ({ cover_image, title, id, price, author, total_copies }) => {
+const BookCard = ({ cover_image, title, id, price, author, total_copies , handleAddToCart }) => {
     const getProgressColor = (total_copies) => {
       if (total_copies > 20) return "success";   
       if (total_copies > 10) return "warning";    
@@ -55,13 +55,23 @@ const BookCard = ({ cover_image, title, id, price, author, total_copies }) => {
             </Box>
           </Box>
           <Box style={{ display: "flex", justifyContent: "space-between" }}>
-            <Button variant="contained" startIcon={<ShoppingCartIcon />} color="primary" style={{ marginTop: "15px", fontSize: "10px" }}>
-              Emprunter
-            </Button>
-            <Button variant="outlined" startIcon={<LocalLibraryIcon />} color="primary" style={{ marginTop: "15px", fontSize: "10px" }}>
-              Ajout
-            </Button>
-          </Box>
+                    <Button
+                        variant="contained"
+                        startIcon={<ShoppingCartIcon />}
+                        color="primary"
+                        style={{ marginTop: "15px", fontSize: "10px" }}
+                    >
+                        Emprunter
+                    </Button>
+                    <Button onClick={handleAddToCart}
+                            variant="outlined"
+                            startIcon={<LocalLibraryIcon />}
+                            color="primary"
+                            style={{ marginTop: "15px", fontSize: "10px" }}
+                    >
+                        Ajout
+                    </Button>
+                </Box>
         </CardContent>
       </Card>
     );

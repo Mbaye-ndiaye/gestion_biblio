@@ -127,14 +127,14 @@ export default function Header() {
           <Box sx={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
 
           <IconButton onClick={handleDrawerOpen}>
-                <ShoppingCartIcon sx={{ color: 'white', backgroundColor: '#F97316', padding: '7px', borderRadius: '10px' }} />
+                <ShoppingCartIcon sx={{ color: 'white', backgroundColor: 'blue', padding: '7px', borderRadius: '10px' }} />
                 {itemCount > 0 && (
                     <Box
                         sx={{
                           position: 'absolute',
                           top: '0px',
                           right: '0px',
-                          backgroundColor: 'black',
+                          backgroundColor: 'red',
                           borderRadius: '50%',
                           width: '20px',
                           height: '20px',
@@ -288,7 +288,7 @@ export default function Header() {
                         justifyContent: "center",
                         alignItems: "center",
                         color: "white",
-                        backgroundColor: "#F97316",
+                        backgroundColor: "blue",
                         marginLeft: 2,
                         marginRight: 2,
                         marginTop: 5,
