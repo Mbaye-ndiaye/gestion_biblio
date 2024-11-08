@@ -15,7 +15,7 @@ export const fetchBooks = createAsyncThunk('books/fetchBooks', async () => {
 // Action pour ajouter un livre
 export const addBook = createAsyncThunk('books/addBook', async (newBook) => {
   const formData = new FormData();
-  
+
   // Ajouter chaque champ à formData
   formData.append('title', newBook.title);
   formData.append('author', newBook.author);
@@ -26,9 +26,11 @@ export const addBook = createAsyncThunk('books/addBook', async (newBook) => {
   formData.append('total_copies', newBook.total_copies);
   formData.append('available_copies', newBook.available_copies);
 
+
   const response = await fetch(process.env.REACT_APP_API_URL+'books/', {
     method: 'POST',
     body: formData,
+
   });
 
   return await response.json();
