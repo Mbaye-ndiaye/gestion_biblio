@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Card, CardMedia, CardContent, Typography, Box, Avatar, Rating, Button, Stack, Skeleton } from "@mui/material";
 import Header from "../../components/navBarUtilisateur/Header";
 import FeaturedBook from "../../components/banner/FeatureBook";
 import Footer from "../../components/Footer/footer";
 import { useSelector } from "react-redux";
-
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 const DetailCard = () => {
   const { id } = useParams();
   const books = useSelector((state) => state.books.books);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate(); // Hook de navigation
 
   useEffect(() => {
     if (books.length > 0) {
@@ -23,6 +24,11 @@ const DetailCard = () => {
     <Box>
       <Header />
       <FeaturedBook />
+       {/* Button for navigating back */}
+       <Box sx={{ display: "flex", ml: 44,  mt: 5 }}>
+        <Button variant="outlined" onClick={() => navigate(-1)}><ArrowBackIcon/></Button>
+      </Box>
+
       <Box sx={{ display: "flex", justifyContent: "center", mt: 15 }}>
         {loading ? (
           // Skeleton Loader
@@ -82,6 +88,8 @@ const DetailCard = () => {
           </Typography>
         )}
       </Box>
+
+     
       <Footer />
     </Box>
   );
