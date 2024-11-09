@@ -75,7 +75,7 @@ export default function Header() {
 
   return (
     <>
-        <AppBar position="fixed" sx={{ backgroundColor: 'white', boxShadow: 'none', padding: '8px 16px' }}>
+        <AppBar position="fixed" sx={{ backgroundColor: 'white', boxShadow: 5, padding: '8px 16px' }}>
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
           {/* Left section: Logo and Title */}
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
