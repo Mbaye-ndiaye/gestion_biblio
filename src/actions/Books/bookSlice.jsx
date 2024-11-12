@@ -8,7 +8,7 @@ const initialState = {
 
 // Action pour récupérer les livres depuis l'API
 export const fetchBooks = createAsyncThunk('books/fetchBooks', async () => {
-  const response = await fetch(process.env.REACT_APP_API_URL+'books/');
+  const response = await fetch(process.env.REACT_APP_API_URL + 'books/');
   return await response.json();
 });
 
@@ -26,20 +26,18 @@ export const addBook = createAsyncThunk('books/addBook', async (newBook) => {
   formData.append('total_copies', newBook.total_copies);
   formData.append('available_copies', newBook.available_copies);
 
-
-  const response = await fetch(process.env.REACT_APP_API_URL+'books/', {
+  const response = await fetch(process.env.REACT_APP_API_URL + 'books/', {
     method: 'POST',
     body: formData,
-
   });
 
   return await response.json();
 });
 
-// Action pour modifier un livre
+// Action pour mettre à jour un livre
 export const updateBook = createAsyncThunk('books/updateBook', async (updatedBook) => {
   const formData = new FormData();
-  
+
   // Ajouter chaque champ à formData
   formData.append('title', updatedBook.title);
   formData.append('author', updatedBook.author);
@@ -50,17 +48,17 @@ export const updateBook = createAsyncThunk('books/updateBook', async (updatedBoo
   formData.append('total_copies', updatedBook.total_copies);
   formData.append('available_copies', updatedBook.available_copies);
 
-  const response = await fetch(process.env.REACT_APP_API_URL+`books/${updatedBook.id}/`, {
+  const response = await fetch(process.env.REACT_APP_API_URL + `books/${updatedBook.id}/`, {
     method: 'PUT',
     body: formData,
   });
 
-  return await response.json(); // Retourne le livre mis à jour
+  return await response.json();
 });
 
 // Action pour supprimer un livre
 export const deleteBook = createAsyncThunk('books/deleteBook', async (bookId) => {
-  await fetch(process.env.REACT_APP_API_URL+`books/${bookId}/`, {
+  await fetch(process.env.REACT_APP_API_URL + `books/${bookId}/`, {
     method: 'DELETE',
   });
 
@@ -94,15 +92,16 @@ const booksSlice = createSlice({
       
       // Update book action
       .addCase(updateBook.fulfilled, (state, action) => {
-        const index = state.books.findIndex(book => book.id === action.payload.id);
-        if (index !== -1) {
-          state.books[index] = action.payload; // Met à jour le livre modifié dans l'état
-        }
+        const updatedBook = action.payload;
+        state.books = state.books.map((book) =>
+          book.id === updatedBook.id ? updatedBook : book
+        );
       })
       
       // Delete book action
       .addCase(deleteBook.fulfilled, (state, action) => {
-        state.books = state.books.filter(book => book.id !== action.payload); // Supprime le livre de l'état
+        const bookId = action.payload;
+        state.books = state.books.filter((book) => book.id !== bookId);
       });
   },
 });

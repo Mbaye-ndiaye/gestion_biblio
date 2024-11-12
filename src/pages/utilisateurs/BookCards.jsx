@@ -21,7 +21,7 @@ const BookCard = ({ cover_image, title, id, price, author, total_copies , handle
             component="img"
             image={cover_image}
             alt={title}
-            style={{ height: 250, objectFit: "contain" }}
+            style={{ height: 250, objectFit: "contain", borderRadius: "5Opx" }}
           />
         </NavLink>
         <CardContent>
@@ -69,7 +69,7 @@ const BookCard = ({ cover_image, title, id, price, author, total_copies , handle
                             color="primary"
                             style={{ marginTop: "15px", fontSize: "10px" }}
                     >
-                        Ajout
+                        Lire
                     </Button>
                 </Box>
         </CardContent>
