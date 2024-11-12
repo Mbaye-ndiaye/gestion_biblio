@@ -8,7 +8,7 @@ export const LOGIN_FAIL = "LOGIN_FAIL";
 export const register = (userData) => async (dispatch) => {
     try {
       // Make an API call to the Django backend
-      const response = await axios.post("https://django-render-22s2.onrender.com/api/register/", userData);
+      const response = await axios.post(process.env.REACT_APP_API_URL+"register/", userData);
       console.log(response.data)
       // Dispatch success action if registration is successful
       
@@ -28,7 +28,7 @@ export const register = (userData) => async (dispatch) => {
 
 export const login = (credentials)=> async (dispatch) => {
   try {
-    const response = await axios.post('https://django-render-22s2.onrender.com/api/login/', credentials);
+    const response = await axios.post(process.env.REACT_APP_API_URL+'login/', credentials);
     console.log(response.data)
     dispatch({
       type: LOGIN_SUCCESS,
