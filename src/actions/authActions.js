@@ -8,7 +8,7 @@ export const LOGIN_FAIL = "LOGIN_FAIL";
 export const register = (userData) => async (dispatch) => {
     try {
       // Make an API call to the Django backend
-      const response = await axios.post(process.env.REACT_APP_API_URL+"register/", userData);
+      const response = await axios.post(process.env.REACT_APP_API_URL+ "register/", userData);
       console.log(response.data)
       // Dispatch success action if registration is successful
       
